@@ -38,7 +38,7 @@ public class DEBait extends PoweredEvent {
                var2 = var7.getData();
                --var7.count;
                if(var7.count <= 0) {
-                  var6.setDead();
+                  var6.die();
                }
             }
          }
@@ -65,18 +65,18 @@ public class DEBait extends PoweredEvent {
          if(var4 instanceof EntityCreature && EntityTypes.a(var4) == var1.data) {
             EntityCreature var5 = (EntityCreature)var4;
             if(!mod_DustMod.isAIEnabled(var5)) {
-               ++var5.posY;
+               ++var5.locY;
                var5.setPathEntity((PathEntity)null);
                var5.setTarget(var1);
-               var5.setPathEntity(var1.worldObj.a(var5, var1.getX(), var1.getY(), var1.getZ(), 10.0F, true, false, false, true));
+               var5.setPathEntity(var1.world.a(var5, var1.getX(), var1.getY(), var1.getZ(), 10.0F, true, false, false, true));
                mod_DustMod.updateState(var5);
-               var5.motionY += 0.5D;
-               ControllerLook var6 = var5.getLookHelper();
+               var5.motY += 0.5D;
+               ControllerLook var6 = var5.getControllerLook();
                var6.a(var1, 1.0F, 1.0F);
-               var5.setMoveForward(16.0F);
+               var5.e(16.0F);
                var5.velocityChanged = true;
                mod_DustMod.setEntityToAttack(var5, var1);
-               var5.setHomeArea(var1.getX(), var1.getY(), var1.getZ(), 0);
+               var5.b(var1.getX(), var1.getY(), var1.getZ(), 0);
                mod_DustMod.setEntityToAttack(var5, var1);
             } else {
                mod_DustMod.setEntityToAttack(var5, var1);
@@ -126,7 +126,7 @@ public class DEBait extends PoweredEvent {
       entdrops.put(new ItemStack(Item.RAW_CHICKEN.id, 0, 0), Integer.valueOf(93));
       entdrops.put(new ItemStack(Item.INK_SACK.id, 0, 0), Integer.valueOf(94));
       entdrops.put(new ItemStack(Item.LEATHER.id, 0, 0), Integer.valueOf(95));
-      entdrops.put(new ItemStack(Block.RED_MUSHROOM.blockID, 0, 0), Integer.valueOf(96));
+      entdrops.put(new ItemStack(Block.RED_MUSHROOM.id, 0, 0), Integer.valueOf(96));
       entdrops.put(new ItemStack(Block.PUMPKIN.id, 0, 0), Integer.valueOf(97));
       entdrops.put(new ItemStack(Item.GRILLED_PORK.id, 0, 0), Integer.valueOf(57));
       entdrops.put(new ItemStack(Item.SULPHUR.id, 0, 0), Integer.valueOf(50));

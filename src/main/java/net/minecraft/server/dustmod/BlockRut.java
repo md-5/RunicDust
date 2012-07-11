@@ -21,19 +21,19 @@ public class BlockRut extends BlockContainer {
       super(var1, 7, Material.WOOD);
    }
 
-   public int getRenderType() {
+   public int c() {
       return mod_DustMod.rutModelID;
    }
 
-   public boolean renderAsNormalBlock() {
+   public boolean b() {
       return false;
    }
 
-   public boolean isOpaqueCube() {
+   public boolean a() {
       return false;
    }
 
-   public void onNeighborBlockChange(World var1, int var2, int var3, int var4, int var5) {
+   public void a(World var1, int var2, int var3, int var4, int var5) {
       for(int var6 = -1; var6 <= 1; ++var6) {
          for(int var7 = -1; var7 <= 1; ++var7) {
             for(int var8 = -1; var8 <= 1; ++var8) {
@@ -102,17 +102,17 @@ public class BlockRut extends BlockContainer {
          }
 
          if(!var7 && var8.fluid != 0 && !var8.fluidIsFluid() && Block.byId[var8.fluid].m() <= TileEntityRut.hardnessStandard && Item.byId[var6.id] instanceof ItemSpade) {
-            this.dropBlockAsItem_do(var1, var2, var3 + 1, var4, new ItemStack(var8.fluid, 1, 0));
+            this.a(var1, var2, var3 + 1, var4, new ItemStack(var8.fluid, 1, 0));
             var8.setFluid(0);
             return true;
          } else if(!var7 && var6.id == mod_DustMod.chisel.id) {
-            Vec3D var41 = var5.getLookVec();
+            Vec3D var41 = var5.aJ();
             double var11 = var41.a;
             double var13 = var41.b;
             double var15 = var41.c;
-            double var10000 = var5.posX - (double)var2;
-            double var19 = var5.posY + (double)var5.getHeadHeight() - (double)var3;
-            var10000 = var5.posZ - (double)var4;
+            double var10000 = var5.locX - (double)var2;
+            double var19 = var5.locY + (double)var5.getHeadHeight() - (double)var3;
+            var10000 = var5.locZ - (double)var4;
             if(var11 == 0.0D) {
                var11 = 0.001D;
             }
@@ -139,9 +139,9 @@ public class BlockRut extends BlockContainer {
             double var37;
             int var40;
             for(var25 = 0.0D; var25 < 4.0D && var23 == 0; var25 += 0.01D) {
-               var27 = var5.posX + var11 * var25;
-               var29 = var5.posY + (double)var5.getHeadHeight() + var13 * var25;
-               var31 = var5.posZ + var15 * var25;
+               var27 = var5.locX + var11 * var25;
+               var29 = var5.locY + (double)var5.getHeadHeight() + var13 * var25;
+               var31 = var5.locZ + var15 * var25;
                var33 = var29 - (double)var3;
                if(var33 >= 0.0D && var33 <= 0.02D) {
                   var35 = Math.abs(var27 - (double)var2) - 0.02D;
@@ -170,9 +170,9 @@ public class BlockRut extends BlockContainer {
             }
 
             for(var25 = 0.0D; var25 < 4.0D && var23 == 1; var25 += 0.01D) {
-               var27 = var5.posX + var11 * var25;
-               var29 = var5.posY + (double)var5.getHeadHeight() + var13 * var25;
-               var31 = var5.posZ + var15 * var25;
+               var27 = var5.locX + var11 * var25;
+               var29 = var5.locY + (double)var5.getHeadHeight() + var13 * var25;
+               var31 = var5.locZ + var15 * var25;
                var33 = var29 - (double)var3;
                if(var33 >= 0.98D && var33 <= 1.0D) {
                   var35 = Math.abs(var27 - (double)var2) - 0.02D;
@@ -201,9 +201,9 @@ public class BlockRut extends BlockContainer {
             }
 
             for(var25 = 0.0D; var25 < 4.0D && var23 == 2; var25 += 0.01D) {
-               var27 = var5.posX + var11 * var25;
-               var29 = var5.posY + (double)var5.getHeadHeight() + var13 * var25;
-               var31 = var5.posZ + var15 * var25;
+               var27 = var5.locX + var11 * var25;
+               var29 = var5.locY + (double)var5.getHeadHeight() + var13 * var25;
+               var31 = var5.locZ + var15 * var25;
                var33 = var31 - (double)var4;
                if(var33 >= 0.0D && var33 <= 0.02D) {
                   var35 = Math.abs(var29 - (double)var3) - 0.02D;
@@ -232,9 +232,9 @@ public class BlockRut extends BlockContainer {
             }
 
             for(var25 = 0.0D; var25 < 4.0D && var23 == 3; var25 += 0.01D) {
-               var27 = var5.posX + var11 * var25;
-               var29 = var5.posY + (double)var5.getHeadHeight() + var13 * var25;
-               var31 = var5.posZ + var15 * var25;
+               var27 = var5.locX + var11 * var25;
+               var29 = var5.locY + (double)var5.getHeadHeight() + var13 * var25;
+               var31 = var5.locZ + var15 * var25;
                var33 = var31 - (double)var4;
                if(var33 >= 0.98D && var33 <= 1.0D) {
                   var35 = Math.abs(var29 - (double)var3) - 0.02D;
@@ -263,9 +263,9 @@ public class BlockRut extends BlockContainer {
             }
 
             for(var25 = 0.0D; var25 < 4.0D && var23 == 4; var25 += 0.01D) {
-               var27 = var5.posX + var11 * var25;
-               var29 = var5.posY + (double)var5.getHeadHeight() + var13 * var25;
-               var31 = var5.posZ + var15 * var25;
+               var27 = var5.locX + var11 * var25;
+               var29 = var5.locY + (double)var5.getHeadHeight() + var13 * var25;
+               var31 = var5.locZ + var15 * var25;
                var33 = var27 - (double)var2;
                if(var33 >= 0.0D && var33 <= 0.02D) {
                   var35 = Math.abs(var29 - (double)var3) - 0.02D;
@@ -294,9 +294,9 @@ public class BlockRut extends BlockContainer {
             }
 
             for(var25 = 0.0D; var25 < 4.0D && var23 == 5; var25 += 0.01D) {
-               var27 = var5.posX + var11 * var25;
-               var29 = var5.posY + (double)var5.getHeadHeight() + var13 * var25;
-               var31 = var5.posZ + var15 * var25;
+               var27 = var5.locX + var11 * var25;
+               var29 = var5.locY + (double)var5.getHeadHeight() + var13 * var25;
+               var31 = var5.locZ + var15 * var25;
                var33 = var27 - (double)var2;
                if(var33 >= 0.98D && var33 <= 1.0D) {
                   var35 = Math.abs(var29 - (double)var3) - 0.02D;
@@ -340,8 +340,8 @@ public class BlockRut extends BlockContainer {
    }
 
    private static int determineOrientation(World var0, int var1, int var2, int var3, EntityHuman var4) {
-      if(MathHelper.abs((float)var4.posX - (float)var1) < 2.0F && MathHelper.abs((float)var4.posZ - (float)var3) < 2.0F) {
-         double var5 = var4.posY + 1.82D - (double)var4.yOffset;
+      if(MathHelper.abs((float)var4.locX - (float)var1) < 2.0F && MathHelper.abs((float)var4.locZ - (float)var3) < 2.0F) {
+         double var5 = var4.locY + 1.82D - (double)var4.height;
          if(var5 - (double)var2 > 2.0D) {
             return 1;
          }
@@ -351,22 +351,22 @@ public class BlockRut extends BlockContainer {
          }
       }
 
-      int var7 = MathHelper.floor((double)(var4.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+      int var7 = MathHelper.floor((double)(var4.yaw * 4.0F / 360.0F) + 0.5D) & 3;
       return var7 == 0?2:(var7 == 1?5:(var7 == 2?3:(var7 != 3?0:4)));
    }
 
-   public void onBlockRemoval(World var1, int var2, int var3, int var4) {
+   public void d(World var1, int var2, int var3, int var4) {
       TileEntityRut var5 = (TileEntityRut)var1.getTileEntity(var2, var3, var4);
-      if(!var5.isDead) {
+      if(!var5.dead) {
          super.remove(var1, var2, var3, var4);
          int var6 = var5.maskBlock;
          int var7 = var5.maskMeta;
          int var8 = Block.byId[var6].getDropType(var7, new Random(), 0);
          int var9 = mod_DustMod.damageDropped(Block.byId[var6], var7);
          int var10 = Block.byId[var6].a(new Random());
-         this.dropBlockAsItem_do(var1, var2, var3, var4, new ItemStack(var8, var10, var9));
+         this.a(var1, var2, var3, var4, new ItemStack(var8, var10, var9));
          if(var5.fluid != 0 && !var5.fluidIsFluid() && var5.canEdit()) {
-            this.dropBlockAsItem_do(var1, var2, var3, var4, new ItemStack(var5.fluid, 1, 0));
+            this.a(var1, var2, var3, var4, new ItemStack(var5.fluid, 1, 0));
          }
 
       }
@@ -376,7 +376,7 @@ public class BlockRut extends BlockContainer {
       return 0;
    }
 
-   public TileEntity getBlockEntity() {
+   public TileEntity a_() {
       return new TileEntityRut();
    }
 }

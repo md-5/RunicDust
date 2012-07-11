@@ -30,7 +30,7 @@ public class DEBounce extends DustEvent {
             EntityLiving var5 = (EntityLiving)var4;
             double var6 = 0.0D;
             double var8 = var4.motY + var6;
-            double var10000 = var1.posY - var5.prevPosY;
+            double var10000 = var1.locY - var5.lastY;
             if(!var5.onGround && !mod_DustMod.isJumping(var5) && var8 < 0.7D) {
                var5.getControllerJump().a();
                var5.getControllerJump().b();

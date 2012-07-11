@@ -30,7 +30,7 @@ public class DEFog extends PoweredEvent {
 
    public void onTick(EntityDust var1) {
       super.onTick(var1);
-      if(var1.ticksExisted % 5 == 0) {
+      if(var1.ticksLived % 5 == 0) {
          boolean var2 = true;
          byte var3 = 10;
          byte var4 = 60;
@@ -38,15 +38,15 @@ public class DEFog extends PoweredEvent {
          float var6 = 0.4F;
          float var7 = 0.0F;
          float var8 = var5 - var6;
-         int var9 = var1.ticksExisted % (var4 * 2) > var4?1:-1;
-         int var10 = var1.ticksExisted % var4 - var4 / 2;
+         int var9 = var1.ticksLived % (var4 * 2) > var4?1:-1;
+         int var10 = var1.ticksLived % var4 - var4 / 2;
          var10 *= var9;
          float var11 = (float)var10 / (float)var4;
          var7 = var11 * var8 + var6 + var8 / 2.0F;
-         if(var1.ticksExisted % var4 == 0 && !var1.worldObj.isStatic) {
+         if(var1.ticksLived % var4 == 0 && !var1.world.isStatic) {
             List var12 = this.getEntities(var1, (double)var3);
             List var13 = var12.subList(0, var12.size());
-            EntityHuman var14 = var1.worldObj.findNearbyPlayer(var1, (double)var3);
+            EntityHuman var14 = var1.world.findNearbyPlayer(var1, (double)var3);
             Iterator var15 = var12.iterator();
 
             while(var15.hasNext()) {
@@ -55,18 +55,18 @@ public class DEFog extends PoweredEvent {
                int var18 = MathHelper.floor(var17.locX);
                int var19 = MathHelper.floor(var17.locY);
                int var20 = MathHelper.floor(var17.locZ);
-               int var21 = var1.worldObj.a(EnumSkyBlock.BLOCK, var18, var19, var20);
+               int var21 = var1.world.a(EnumSkyBlock.BLOCK, var18, var19, var20);
                if(var21 >= 7) {
                   System.out.println("Err light");
                } else {
                   if(var17 instanceof EntityCreature) {
                      EntityCreature var22 = (EntityCreature)var17;
-                     var22.setRevengeTarget(var22);
-                     var22.setAttackTarget(var22);
+                     var22.a(var22);
+                     var22.b(var22);
                      mod_DustMod.setEntityToAttack(var22, var22);
                      var22.setPathEntity((PathEntity)null);
                      mod_DustMod.setHasAttacked(var22, true);
-                     var22.attackTime = 30;
+                     var22.attackTicks = 30;
                      if(var14 != null) {
                         mod_DustMod.setCantSee(var22, var14);
                      }
@@ -74,7 +74,7 @@ public class DEFog extends PoweredEvent {
 
                   if(var17 instanceof EntityLiving && Math.random() < 0.8D) {
                      EntityLiving var23 = (EntityLiving)var16;
-                     var23.setPositionAndRotation(var23.posX, var23.posY, var23.posZ, (float)Math.random() * 360.0F, var23.rotationPitch);
+                     var23.setPositionRotation(var23.locX, var23.locY, var23.locZ, (float)Math.random() * 360.0F, var23.pitch);
                   }
                }
             }

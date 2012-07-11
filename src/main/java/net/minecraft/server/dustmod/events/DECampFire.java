@@ -22,11 +22,11 @@ public class DECampFire extends PoweredEvent {
       var2 = this.sacrifice(var1, var2);
       if(var2[0].count <= 0 && var2[1].count <= 0) {
          var1.data = 2400;
-         int var3 = var1.worldObj.getTypeId(var1.getX(), var1.getY(), var1.getZ());
-         if(var3 != Block.FIRE.blockID) {
-            int var4 = var1.worldObj.getTypeId(var1.getX(), var1.getY() - 1, var1.getZ());
-            if(var3 == 0 && var4 != 0 && Block.byId[var4].isBlockSolidOnSide(var1.worldObj, var1.getX(), var1.getY() - 1, var1.getZ(), 1)) {
-               var1.worldObj.setTypeId(var1.getX(), var1.getY(), var1.getZ(), Block.FIRE.blockID);
+         int var3 = var1.world.getTypeId(var1.getX(), var1.getY(), var1.getZ());
+         if(var3 != Block.FIRE.id) {
+            int var4 = var1.world.getTypeId(var1.getX(), var1.getY() - 1, var1.getZ());
+            if(var3 == 0 && var4 != 0 && Block.byId[var4].isBlockSolidOnSide(var1.world, var1.getX(), var1.getY() - 1, var1.getZ(), 1)) {
+               var1.world.setTypeId(var1.getX(), var1.getY(), var1.getZ(), Block.FIRE.id);
             }
          }
 
@@ -37,20 +37,20 @@ public class DECampFire extends PoweredEvent {
 
    public void onTick(EntityDust var1) {
       super.onTick(var1);
-      int var2 = var1.worldObj.getTypeId(var1.getX(), var1.getY(), var1.getZ());
-      if(var2 != Block.FIRE.blockID) {
-         if(var1.worldObj.x() && var1.worldObj.isChunkLoaded(var1.getX(), var1.getY(), var1.getZ())) {
-            var1.kill();
+      int var2 = var1.world.getTypeId(var1.getX(), var1.getY(), var1.getZ());
+      if(var2 != Block.FIRE.id) {
+         if(var1.world.x() && var1.world.isChunkLoaded(var1.getX(), var1.getY(), var1.getZ())) {
+            var1.aI();
             return;
          }
 
-         int var3 = var1.worldObj.getTypeId(var1.getX(), var1.getY() - 1, var1.getZ());
-         if(var2 != 0 || var3 == 0 || !Block.byId[var3].isBlockSolidOnSide(var1.worldObj, var1.getX(), var1.getY() - 1, var1.getZ(), 1)) {
-            var1.kill();
+         int var3 = var1.world.getTypeId(var1.getX(), var1.getY() - 1, var1.getZ());
+         if(var2 != 0 || var3 == 0 || !Block.byId[var3].isBlockSolidOnSide(var1.world, var1.getX(), var1.getY() - 1, var1.getZ(), 1)) {
+            var1.aI();
             return;
          }
 
-         var1.worldObj.setTypeId(var1.getX(), var1.getY(), var1.getZ(), Block.FIRE.blockID);
+         var1.world.setTypeId(var1.getX(), var1.getY(), var1.getZ(), Block.FIRE.id);
       }
 
       List var14 = this.getEntities(var1, 0.5D);
@@ -63,19 +63,19 @@ public class DECampFire extends PoweredEvent {
             var6.damageEntity((DamageSource)null, -20);
             ItemStack var7 = var6.itemStack;
             ItemStack var8 = FurnaceRecipes.getInstance().getSmeltingResult(var7);
-            if(var1.ticksExisted % 20 == 0) {
+            if(var1.ticksLived % 20 == 0) {
                double var9 = Math.random();
                double var11 = 0.1D * (double)var6.itemStack.count;
                if(var9 < var11) {
-                  var6.setDead();
+                  var6.die();
                } else if(var9 >= 0.6D) {
                   if(var8 != null) {
                      var6.itemStack.id = var8.id;
                      var6.itemStack.count *= var8.count;
 
                      while(var6.itemStack.count > var6.itemStack.getMaxStackSize()) {
-                        EntityItem var13 = new EntityItem(var6.worldObj, var6.posX, var6.posY, var6.posZ, new ItemStack(var6.itemStack.id, var6.itemStack.getMaxStackSize(), var6.itemStack.getData()));
-                        var6.worldObj.addEntity(var13);
+                        EntityItem var13 = new EntityItem(var6.world, var6.locX, var6.locY, var6.locZ, new ItemStack(var6.itemStack.id, var6.itemStack.getMaxStackSize(), var6.itemStack.getData()));
+                        var6.world.addEntity(var13);
                         this.shoot(var13);
                      }
                   }
@@ -90,9 +90,9 @@ public class DECampFire extends PoweredEvent {
 
    public void shoot(EntityItem var1) {
       float var2 = 0.12F;
-      var1.motionX = (double)((float)var1.worldObj.random.nextGaussian() * var2);
-      var1.motionY = (double)((float)var1.worldObj.random.nextGaussian() * var2 + 0.5F);
-      var1.motionZ = (double)((float)var1.worldObj.random.nextGaussian() * var2);
+      var1.motX = (double)((float)var1.world.random.nextGaussian() * var2);
+      var1.motY = (double)((float)var1.world.random.nextGaussian() * var2 + 0.5F);
+      var1.motZ = (double)((float)var1.world.random.nextGaussian() * var2);
    }
 
    public void onRightClick(EntityDust var1, TileEntityDust var2, EntityHuman var3) {

@@ -33,19 +33,19 @@ public class DESpawnerCollector extends DustEvent {
       var2[0] /= 8;
       var2[1] /= 8;
       var2[2] /= 8;
-      if(var1.worldObj.getTypeId(var2[0], var2[1], var2[2]) == Block.MOB_SPAWNER.id) {
-         ((TileEntityMobSpawner)var1.worldObj.getTileEntity(var2[0], var2[1], var2[2])).invalidate();
-         if(var1.ticksExisted > 100) {
-            var1.worldObj.setTypeId(var2[0], var2[1], var2[2], 0);
-            var1.worldObj.notify(var2[0], var2[1], var2[2]);
-            EntityItem var5 = new EntityItem(var1.worldObj);
-            var5.setPosition(var1.posX, var1.posY - 0.0D, var1.posZ);
+      if(var1.world.getTypeId(var2[0], var2[1], var2[2]) == Block.MOB_SPAWNER.id) {
+         ((TileEntityMobSpawner)var1.world.getTileEntity(var2[0], var2[1], var2[2])).j();
+         if(var1.ticksLived > 100) {
+            var1.world.setTypeId(var2[0], var2[1], var2[2], 0);
+            var1.world.notify(var2[0], var2[1], var2[2]);
+            EntityItem var5 = new EntityItem(var1.world);
+            var5.setPosition(var1.locX, var1.locY - 0.0D, var1.locZ);
             var5.itemStack = new ItemStack(Block.MOB_SPAWNER, 1);
-            var1.worldObj.addEntity(var5);
+            var1.world.addEntity(var5);
          }
       }
 
-      if(var1.ticksExisted > 100) {
+      if(var1.ticksLived > 100) {
          var1.fade();
       }
 

@@ -27,7 +27,7 @@ public class DEHideout extends DustEvent {
          int var2 = var1.getX();
          int var3 = var1.getY();
          int var4 = var1.getZ();
-         World var5 = var1.worldObj;
+         World var5 = var1.world;
          if(var5.getTypeId(var2, var3 - 2 - 1, var4) == 0) {
             this.doCheck(var1);
          } else {
@@ -79,7 +79,7 @@ public class DEHideout extends DustEvent {
 
    public void onTick(EntityDust var1) {
       super.onTick(var1);
-      if(var1.ticksExisted % 10 == 0) {
+      if(var1.ticksLived % 10 == 0) {
          this.yCheck(var1);
       }
 
@@ -95,19 +95,19 @@ public class DEHideout extends DustEvent {
             if(var4 instanceof EntityHuman) {
                var5 = (EntityHuman)var4;
                var1.ram = 45;
-               var5.setPositionAndUpdate((double)var1.getX() + 0.5D, (double)(var1.data + 1) + 0.5D, (double)var1.getZ() + 0.5D);
+               var5.enderTeleportTo((double)var1.getX() + 0.5D, (double)(var1.data + 1) + 0.5D, (double)var1.getZ() + 0.5D);
                var5.fallDistance = 0.0F;
             }
          }
 
-         var2 = this.getEntities(var1.worldObj, (double)var1.getX(), (double)(var1.data + 2), (double)var1.getZ(), 0.5D);
+         var2 = this.getEntities(var1.world, (double)var1.getX(), (double)(var1.data + 2), (double)var1.getZ(), 0.5D);
          var3 = var2.iterator();
 
          while(var3.hasNext()) {
             var4 = (Entity)var3.next();
             if(var4 instanceof EntityHuman && var4.isSneaking()) {
                var5 = (EntityHuman)var4;
-               var5.setPositionAndUpdate((double)var1.getX() + 0.5D, (double)var1.getY() + 0.5D, (double)var1.getZ() + 0.5D);
+               var5.enderTeleportTo((double)var1.getX() + 0.5D, (double)var1.getY() + 0.5D, (double)var1.getZ() + 0.5D);
                var5.fallDistance = 0.0F;
                var1.ram = 45;
             }
@@ -123,7 +123,7 @@ public class DEHideout extends DustEvent {
       int var2 = var1.getX();
       int var3 = var1.data;
       int var4 = var1.getZ();
-      World var5 = var1.worldObj;
+      World var5 = var1.world;
       int var6 = var5.getTypeId(var2, var3, var4);
       int var7 = var5.getTypeId(var2, var3 + 1, var4);
       Block var8 = Block.byId[var6];
@@ -141,7 +141,7 @@ public class DEHideout extends DustEvent {
    private void doCheck(EntityDust var1) {
       int var2;
       for(var2 = var1.getY() - 1 - 2; var2 > 3 && var2 > var1.getY() - 1 - 2 - 64; --var2) {
-         int var3 = var1.worldObj.getTypeId(var1.getX(), var2, var1.getZ());
+         int var3 = var1.world.getTypeId(var1.getX(), var2, var1.getZ());
          Block var4 = Block.byId[var3];
          if(var4 != null && var4.a()) {
             break;

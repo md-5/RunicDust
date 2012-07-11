@@ -228,7 +228,7 @@ public class mod_DustMod extends NetworkMod implements IGuiHandler {
    }
 
    public static boolean isAIEnabled(EntityCreature var0) {
-      return var0.isAIEnabled();
+      return var0.c_();
    }
 
    public static void updateActionState(EntityLiving var0) {
@@ -493,7 +493,7 @@ public class mod_DustMod extends NetworkMod implements IGuiHandler {
    }
 
    public static int[] toWarp(EntityDust var0) {
-      return new int[]{var0.getX(), ((Integer[])var0.dustPoints.get(0))[1].intValue(), var0.getZ(), var0.data, var0.worldObj.getData(var0.getX(), ((Integer[])var0.dustPoints.get(0))[1].intValue() - 1, var0.getZ()), (int)var0.rotationYaw, var0.worldObj.worldProvider.dimension, 1};
+      return new int[]{var0.getX(), ((Integer[])var0.dustPoints.get(0))[1].intValue(), var0.getZ(), var0.data, var0.world.getData(var0.getX(), ((Integer[])var0.dustPoints.get(0))[1].intValue() - 1, var0.getZ()), (int)var0.yaw, var0.world.worldProvider.dimension, 1};
    }
 
    public static EntityDust getWarpEntity(int[] var0, World var1) {
@@ -572,18 +572,18 @@ public class mod_DustMod extends NetworkMod implements IGuiHandler {
       nextDustEntID = 0L;
       entMap = new HashMap();
       groundTex = ModLoader.addOverride("/terrain.png", path + "/dust.png");
-      dust = (new BlockDust(BLOCK_DustID, 164)).setHardness(0.2F).a(0.45F).a(Block.g).a("dustblock").j();
-      idust = (new ItemDust(ITEM_DustID, dust)).setItemName("idust");
+      dust = (new BlockDust(BLOCK_DustID, 164)).c(0.2F).a(0.45F).a(Block.g).a("dustblock").j();
+      idust = (new ItemDust(ITEM_DustID, dust)).a("idust");
       dustTable = (new BlockDustTable(BLOCK_DustTableID)).c(2.5F).a(Block.e).a("dustTable");
-      tome = (new ItemRunicTome(ITEM_RunicTomeID)).setItemName("dustlibrary").d(ModLoader.addOverride("/gui/items.png", path + "/notebook.png"));
+      tome = (new ItemRunicTome(ITEM_RunicTomeID)).a("dustlibrary").d(ModLoader.addOverride("/gui/items.png", path + "/notebook.png"));
       negateSacrifice = (new Item(ITEM_SacrificeNegationID)).a("negateSacrifice").d(ModLoader.addOverride("/gui/items.png", path + "/cancel.png"));
       runicPaper = (new Item(ITEM_RunicPaperID)).a("runicPaper").d(ModLoader.addOverride("/gui/items.png", path + "/runicPaper.png"));
-      dustScroll = (new ItemPlaceScroll(ITEM_DustScrollID)).setItemName("dustscroll");
-      rutBlock = (new BlockRut(BLOCK_RutID)).setBlockName("dustrutblock").c(3.0F);
+      dustScroll = (new ItemPlaceScroll(ITEM_DustScrollID)).a("dustscroll");
+      rutBlock = (new BlockRut(BLOCK_RutID)).a("dustrutblock").c(3.0F);
       ModLoader.registerBlock(rutBlock);
-      chisel = (new ItemChisel(ITEM_ChiselID)).setItemName("itemdustchisel");
-      spiritPickaxe = (new ItemSpiritPickaxe(ITEM_SpiritPickID, EnumToolMaterial.DIAMOND)).setIconIndex(ModLoader.addOverride("/gui/items.png", path + "/spiritpick.png")).a("dustpickaxeSpirit");
-      spiritSword = (new ItemSpiritSword(ITEM_SpiritSwordID)).setIconIndex(ModLoader.addOverride("/gui/items.png", path + "/spiritsword.png")).a("dustswordSpirit");
+      chisel = (new ItemChisel(ITEM_ChiselID)).a("itemdustchisel");
+      spiritPickaxe = (new ItemSpiritPickaxe(ITEM_SpiritPickID, EnumToolMaterial.DIAMOND)).d(ModLoader.addOverride("/gui/items.png", path + "/spiritpick.png")).a("dustpickaxeSpirit");
+      spiritSword = (new ItemSpiritSword(ITEM_SpiritSwordID)).d(ModLoader.addOverride("/gui/items.png", path + "/spiritsword.png")).a("dustswordSpirit");
       ModLoader.registerBlock(dust);
       ModLoader.registerBlock(dustTable);
       ModLoader.addLocalization("tile.plantdust.name", "Plant Runic Dust");

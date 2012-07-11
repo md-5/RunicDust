@@ -23,7 +23,7 @@ public class DELumberjack extends DustEvent {
          int var3 = var1.getX();
          int var4 = var1.getY();
          int var5 = var1.getZ();
-         if(var1.worldObj.getTypeId(var3, var4, var5) != Block.LOG.id) {
+         if(var1.world.getTypeId(var3, var4, var5) != Block.LOG.id) {
             var1.fizzle();
          }
 
@@ -33,11 +33,11 @@ public class DELumberjack extends DustEvent {
    }
 
    public void onTick(EntityDust var1) {
-      if(var1.ticksExisted > 100) {
+      if(var1.ticksLived > 100) {
          int var2 = var1.getX();
          int var3 = var1.getY();
          int var4 = var1.getZ();
-         World var5 = var1.worldObj;
+         World var5 = var1.world;
          if(var5.getTypeId(var2, var3, var4) == Block.LOG.id) {
             this.checkWood(var5, var2, var3, var4, var1.data, var2, var3, var4);
          }

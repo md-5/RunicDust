@@ -24,9 +24,9 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
    public static Packet getTEDPacket(TileEntityDust var0) {
       ByteArrayOutputStream var1 = new ByteArrayOutputStream(140);
       DataOutputStream var2 = new DataOutputStream(var1);
-      int var3 = var0.xCoord;
-      int var4 = var0.yCoord;
-      int var5 = var0.zCoord;
+      int var3 = var0.x;
+      int var4 = var0.y;
+      int var5 = var0.z;
 
       try {
          var2.writeInt(var3);
@@ -46,16 +46,16 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
       var9.tag = "TEdust";
       var9.data = var1.toByteArray();
       var9.length = var1.size();
-      var9.isChunkDataPacket = true;
+      var9.lowPriority = true;
       return var9;
    }
 
    public static Packet getTELPacket(TileEntityDustTable var0) {
       ByteArrayOutputStream var1 = new ByteArrayOutputStream(140);
       DataOutputStream var2 = new DataOutputStream(var1);
-      int var3 = var0.xCoord;
-      int var4 = var0.yCoord;
-      int var5 = var0.zCoord;
+      int var3 = var0.x;
+      int var4 = var0.y;
+      int var5 = var0.z;
 
       try {
          var2.writeInt(var3);
@@ -70,16 +70,16 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
       var6.tag = "TElexicon";
       var6.data = var1.toByteArray();
       var6.length = var1.size();
-      var6.isChunkDataPacket = true;
+      var6.lowPriority = true;
       return var6;
    }
 
    public static Packet getTERPacket(TileEntityRut var0) {
       ByteArrayOutputStream var1 = new ByteArrayOutputStream(140);
       DataOutputStream var2 = new DataOutputStream(var1);
-      int var3 = var0.xCoord;
-      int var4 = var0.yCoord;
-      int var5 = var0.zCoord;
+      int var3 = var0.x;
+      int var4 = var0.y;
+      int var5 = var0.z;
 
       try {
          var2.writeInt(var3);
@@ -104,7 +104,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
       var10.tag = "TERut";
       var10.data = var1.toByteArray();
       var10.length = var1.size();
-      var10.isChunkDataPacket = true;
+      var10.lowPriority = true;
       return var10;
    }
 

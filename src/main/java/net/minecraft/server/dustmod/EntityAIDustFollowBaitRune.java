@@ -10,47 +10,47 @@ public class EntityAIDustFollowBaitRune extends PathfinderGoal {
 
    private EntityCreature theEntity;
    private EntityDust dust;
-   private double movePosX;
-   private double movePosY;
-   private double movePosZ;
+   private double movelocX;
+   private double movelocY;
+   private double movelocZ;
    private float speed;
 
 
    public EntityAIDustFollowBaitRune(EntityCreature var1, float var2) {
       this.theEntity = var1;
       this.speed = var2;
-      this.setMutexBits(1);
+      this.a(1);
    }
 
-   public boolean shouldExecute() {
+   public boolean a() {
       Entity var1 = mod_DustMod.getEntityToAttack(this.theEntity);
       if(var1 == null) {
          return false;
       } else if(var1 instanceof EntityDust) {
          this.dust = (EntityDust)var1;
-         this.movePosX = (double)this.dust.getX();
-         this.movePosY = (double)this.dust.getY();
-         this.movePosZ = (double)this.dust.getZ();
+         this.movelocX = (double)this.dust.getX();
+         this.movelocY = (double)this.dust.getY();
+         this.movelocZ = (double)this.dust.getZ();
          return true;
       } else {
          return false;
       }
    }
 
-   public void updateTask() {
+   public void e() {
       super.e();
-      this.theEntity.getNavigator().a(this.movePosX, this.movePosY, this.movePosZ, this.speed);
+      this.theEntity.al().a(this.movelocX, this.movelocY, this.movelocZ, this.speed);
    }
 
-   public boolean continueExecuting() {
-      return this.dust == null || !this.dust.isDead;
+   public boolean b() {
+      return this.dust == null || !this.dust.dead;
    }
 
-   public void resetTask() {
+   public void d() {
       this.dust = null;
    }
 
-   public void startExecuting() {
-      this.theEntity.getNavigator().a(this.movePosX, this.movePosY, this.movePosZ, this.speed);
+   public void c() {
+      this.theEntity.al().a(this.movelocX, this.movelocY, this.movelocZ, this.speed);
    }
 }

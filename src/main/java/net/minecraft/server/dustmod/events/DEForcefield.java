@@ -40,8 +40,8 @@ public class DEForcefield extends PoweredEvent {
          Entity var9 = (Entity)var8.next();
          float var10;
          if(var9 instanceof IMonster && (var10 = var9.i(var1)) < var2) {
-            double var11 = var9.locX - var1.posX;
-            double var13 = var9.locZ - var1.posZ;
+            double var11 = var9.locX - var1.locX;
+            double var13 = var9.locZ - var1.locZ;
             float var15 = (float)(Math.atan2(var13, var11) * 180.0D / 3.141592653589793D) - 90.0F;
             float var16 = var2 / var10 * 0.5F;
             var9.motX -= (double)(MathHelper.cos((var15 + 270.0F) * 0.01745329F) * var16);
@@ -49,7 +49,7 @@ public class DEForcefield extends PoweredEvent {
          }
       }
 
-      if(var1.ticksExisted % 25 == 0) {
+      if(var1.ticksLived % 25 == 0) {
          var1.shineRadiusSphere(var2, 0.0D, 0.5D, 0.5D);
       }
 

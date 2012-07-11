@@ -50,7 +50,7 @@ public class DESpiritTool extends DustEvent {
 
    public void onTick(EntityDust var1) {
       var1.starScale = (float)((double)var1.starScale + 0.001D);
-      if(var1.ticksExisted > 20) {
+      if(var1.ticksLived > 20) {
          EntityItem var2 = null;
          int var3 = 0;
          if(var1.data == 1) {
@@ -65,10 +65,10 @@ public class DESpiritTool extends DustEvent {
             var4.addEnchantment(Enchantment.DAMAGE_UNDEAD, 5);
          }
 
-         var2 = new EntityItem(var1.worldObj, var1.posX, var1.posY - 0.0D, var1.posZ, var4);
+         var2 = new EntityItem(var1.world, var1.locX, var1.locY - 0.0D, var1.locZ, var4);
          if(var2 != null) {
-            var2.setPosition(var1.posX, var1.posY - 0.0D, var1.posZ);
-            var1.worldObj.addEntity(var2);
+            var2.setPosition(var1.locX, var1.locY - 0.0D, var1.locZ);
+            var1.world.addEntity(var2);
          }
 
          var1.fade();

@@ -39,7 +39,7 @@ public class DEResurrection extends DustEvent {
 
          if(var3.size() == 0) {
             System.out.println("k2");
-            var1.kill();
+            var1.aI();
          } else {
             int var14 = -1;
             Iterator var15 = var3.iterator();
@@ -74,7 +74,7 @@ public class DEResurrection extends DustEvent {
                            --var11;
                            --var13.itemStack.count;
                            if(var13.itemStack.count <= 0) {
-                              var13.setDead();
+                              var13.die();
                            }
                         }
                      }
@@ -99,12 +99,12 @@ public class DEResurrection extends DustEvent {
 
    public void onTick(EntityDust var1) {
       var1.starScale = (float)((double)var1.starScale + 0.001D);
-      if(var1.ticksExisted > 120) {
+      if(var1.ticksLived > 120) {
          Entity var2 = null;
-         var2 = EntityTypes.a(var1.data, var1.worldObj);
+         var2 = EntityTypes.a(var1.data, var1.world);
          if(var2 != null) {
-            var2.setPosition(var1.posX, var1.posY - 0.0D, var1.posZ);
-            var1.worldObj.addEntity(var2);
+            var2.setPosition(var1.locX, var1.locY - 0.0D, var1.locZ);
+            var1.world.addEntity(var2);
          }
 
          var1.fade();

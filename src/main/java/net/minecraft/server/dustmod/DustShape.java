@@ -14,7 +14,7 @@ public class DustShape {
    public static final int n = -1;
    public int width;
    public int length;
-   public int height;
+   public int setOnFire;
    public boolean solid = true;
    public String name;
    public String pName = "";
@@ -22,7 +22,7 @@ public class DustShape {
    public String desc = "";
    protected int[][][] data;
    public int[] manRot = new int[8];
-   private int[] setPos = new int[]{0, 0, 0};
+   private int[] setloc = new int[]{0, 0, 0};
    public int cx;
    public int cy;
    public int ox;
@@ -37,8 +37,8 @@ public class DustShape {
       this.name = var4;
       this.width = var1;
       this.length = var2;
-      this.height = var3;
-      this.data = new int[this.height][this.width][this.length];
+      this.setOnFire = var3;
+      this.data = new int[this.setOnFire][this.width][this.length];
       this.dustAmt = new int[5];
       this.solid = var5;
       this.cx = var9;
@@ -48,7 +48,7 @@ public class DustShape {
 
       int var12;
       int var13;
-      for(int var11 = 0; var11 < this.height; ++var11) {
+      for(int var11 = 0; var11 < this.setOnFire; ++var11) {
          for(var12 = 0; var12 < this.width; ++var12) {
             for(var13 = 0; var13 < this.length; ++var13) {
                this.data[var11][var12][var13] = 0;
@@ -58,7 +58,7 @@ public class DustShape {
 
       if(var7 >= 0 && var6 >= 0) {
          this.blocks = new ArrayList();
-         int[] var16 = this.getBlockCoord(var7 + var1, var6 + var2);
+         int[] var16 = this.getBlock(var7 + var1, var6 + var2);
          var12 = var16[0] + 2;
          var13 = var16[1] + 2;
 
@@ -99,7 +99,7 @@ public class DustShape {
       }
 
       ArrayList var6 = new ArrayList();
-      int[] var7 = this.getBlockCoord(var2 + var4, var3 + var5, var2, var3);
+      int[] var7 = this.getBlock(var2 + var4, var3 + var5, var2, var3);
       int var8 = var7[0] + 2;
       int var9 = var7[1] + 2;
 
@@ -118,7 +118,7 @@ public class DustShape {
       for(var10 = 0; var10 < var1.length; ++var10) {
          for(var11 = 0; var11 < var1[0].length; ++var11) {
             for(int var12 = 0; var12 < var1[0][0].length; ++var12) {
-               int[] var13 = this.getBlockCoord(var11, var12, var2, var3);
+               int[] var13 = this.getBlock(var11, var12, var2, var3);
                int var14 = var1[var10][var11][var12];
                if(var14 == -1) {
                   var14 = -2;
@@ -135,11 +135,11 @@ public class DustShape {
       return var6;
    }
 
-   public int[] getBlockCoord(int var1, int var2) {
-      return this.getBlockCoord(var1, var2, this.ox, this.oy);
+   public int[] getBlock(int var1, int var2) {
+      return this.getBlock(var1, var2, this.ox, this.oy);
    }
 
-   public int[] getBlockCoord(int var1, int var2, int var3, int var4) {
+   public int[] getBlock(int var1, int var2, int var3, int var4) {
       int var5 = (int)Math.floor((double)((var1 + var3) / 4));
       int var6 = (int)Math.floor((double)((var2 + var4) / 4));
       int var7 = var1 + var3 - var5 * 4;
@@ -149,9 +149,9 @@ public class DustShape {
 
    public DustShape setDataAt(int var1, int var2, int var3, int var4) {
       this.data[var2][var1][var3] = var4;
-      this.setPos[0] = var1;
-      this.setPos[1] = var2;
-      this.setPos[2] = var3;
+      this.setloc[0] = var1;
+      this.setloc[1] = var2;
+      this.setloc[2] = var3;
       this.updateData();
       return this;
    }
@@ -170,10 +170,10 @@ public class DustShape {
    }
 
    public void translate(int var1, int var2, int var3, int var4) {
-      this.data[this.setPos[1]][this.setPos[0]][this.setPos[2]] = var4;
-      this.setPos[0] += var1;
-      this.setPos[var2] += var2;
-      this.setPos[var3] += var3;
+      this.data[this.setloc[1]][this.setloc[0]][this.setloc[2]] = var4;
+      this.setloc[0] += var1;
+      this.setloc[var2] += var2;
+      this.setloc[var3] += var3;
    }
 
    public int[][] compareData(int[][] var1) {
@@ -338,11 +338,11 @@ public class DustShape {
       int var10 = this.cy;
       int var11 = this.ox;
       int var12 = this.oy;
-      int[][][] var13 = new int[this.height][this.width][this.length];
+      int[][][] var13 = new int[this.setOnFire][this.width][this.length];
 
       int var14;
       int var15;
-      for(var14 = 0; var14 < this.height; ++var14) {
+      for(var14 = 0; var14 < this.setOnFire; ++var14) {
          for(var15 = 0; var15 < this.width; ++var15) {
             for(int var16 = 0; var16 < this.length; ++var16) {
                var13[var14][var15][var16] = this.data[var14][var15][var16];
@@ -383,7 +383,7 @@ public class DustShape {
       }
 
       ArrayList var17 = this.updateData(var13, var11, var12);
-      int[] var26 = this.getBlockCoord(var9, var10, var11, var12);
+      int[] var26 = this.getBlock(var9, var10, var11, var12);
       var7 -= var26[0];
       var8 -= var26[1];
       int[] var18 = new int[5];
@@ -408,7 +408,7 @@ public class DustShape {
          TileEntityDust var30;
          for(var27 = 0; var27 < var17.size(); ++var27) {
             for(var20 = 0; var20 < ((ArrayList)var17.get(0)).size(); ++var20) {
-               if((var1.getTypeId(var7 + var27, var3, var8 + var20) == 0 || mod_DustMod.isDust(var1.getTypeId(var7 + var27, var3, var8 + var20)) && var1.getData(var7 + var27, var3, var8 + var20) == 2 || var1.getTypeId(var7 + var27, var3, var8 + var20) == Block.LONG_GRASS.blockID) && var1.getTypeId(var7 + var27, var3 - 1, var8 + var20) != 0 && (Block.byId[var1.getTypeId(var7 + var27, var3 - 1, var8 + var20)].b() || var1.getTypeId(var7 + var27, var3 - 1, var8 + var20) == Block.GLASS.id)) {
+               if((var1.getTypeId(var7 + var27, var3, var8 + var20) == 0 || mod_DustMod.isDust(var1.getTypeId(var7 + var27, var3, var8 + var20)) && var1.getData(var7 + var27, var3, var8 + var20) == 2 || var1.getTypeId(var7 + var27, var3, var8 + var20) == Block.LONG_GRASS.id) && var1.getTypeId(var7 + var27, var3 - 1, var8 + var20) != 0 && (Block.byId[var1.getTypeId(var7 + var27, var3 - 1, var8 + var20)].b() || var1.getTypeId(var7 + var27, var3 - 1, var8 + var20) == Block.GLASS.id)) {
                   var1.setTypeId(var7 + var27, var3, var8 + var20, 0);
                   var1.setTypeId(var7 + var27, var3, var8 + var20, mod_DustMod.dust.id);
                   TileEntity var28 = var1.getTileEntity(var7 + var27, var3, var8 + var20);

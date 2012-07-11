@@ -40,7 +40,7 @@ public class DEFortuneEnch extends DustEvent {
 
    public void onTick(EntityDust var1) {
       var1.starScale = (float)((double)var1.starScale + 0.001D);
-      if(var1.ticksExisted > 20) {
+      if(var1.ticksLived > 20) {
          EntityItem var2 = null;
          ItemStack var3 = new ItemStack(var1.data, 1, 0);
          if(var1.data == Item.DIAMOND_SWORD.id) {
@@ -51,10 +51,10 @@ public class DEFortuneEnch extends DustEvent {
             var3.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 4);
          }
 
-         var2 = new EntityItem(var1.worldObj, var1.posX, var1.posY - 0.0D, var1.posZ, var3);
+         var2 = new EntityItem(var1.world, var1.locX, var1.locY - 0.0D, var1.locZ, var3);
          if(var2 != null) {
-            var2.setPosition(var1.posX, var1.posY, var1.posZ);
-            var1.worldObj.addEntity(var2);
+            var2.setPosition(var1.locX, var1.locY, var1.locZ);
+            var1.world.addEntity(var2);
          }
 
          var1.fade();

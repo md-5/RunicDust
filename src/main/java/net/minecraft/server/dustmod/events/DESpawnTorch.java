@@ -17,7 +17,7 @@ public class DESpawnTorch extends DustEvent {
          var1.data = 1;
       }
 
-      World var3 = var1.worldObj;
+      World var3 = var1.world;
       int var4 = var1.getX();
       int var5 = var1.getY();
       int var6 = var1.getZ();
@@ -25,7 +25,7 @@ public class DESpawnTorch extends DustEvent {
          var1.renderBeam = true;
          var1.rb = var1.gb = var1.bb = 255;
       } else {
-         var1.posY += 0.35D;
+         var1.locY += 0.35D;
          var1.renderStar = true;
          var1.ignoreRune = true;
          var3.setRawTypeId(var4, var5, var6, 0);
@@ -36,8 +36,8 @@ public class DESpawnTorch extends DustEvent {
 
    protected void onTick(EntityDust var1) {
       super.onTick(var1);
-      if(var1.data == 0 && var1.worldObj.getTypeId(var1.getX(), var1.getY(), var1.getZ()) != Block.TORCH.id) {
-         var1.kill();
+      if(var1.data == 0 && var1.world.getTypeId(var1.getX(), var1.getY(), var1.getZ()) != Block.TORCH.id) {
+         var1.aI();
       }
 
    }

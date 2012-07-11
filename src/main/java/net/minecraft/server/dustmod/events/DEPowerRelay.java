@@ -38,7 +38,7 @@ public class DEPowerRelay extends PoweredEvent {
       }
 
       var1.setColorStar(255, var4, var4);
-      if(var1.ticksExisted % 10 == 0) {
+      if(var1.ticksLived % 10 == 0) {
          this.disperseFuel(var1);
       }
 
@@ -110,7 +110,7 @@ public class DEPowerRelay extends PoweredEvent {
 
       for(int var11 = 0; var11 < var10; ++var11) {
          EntityDust var12 = var9[var11];
-         if(!var12.isDead && var1.getDistanceSqToEntity(var12) <= (double)(distance * distance)) {
+         if(!var12.dead && var1.j(var12) <= (double)(distance * distance)) {
             var12.fueledExternally = true;
             PoweredEvent var13 = (PoweredEvent)var12.event;
             var1.data += var13.getStableFuelAmount(var12);
@@ -142,7 +142,7 @@ public class DEPowerRelay extends PoweredEvent {
       int var2 = var0.getY();
       int var3 = var0.getZ();
       byte var4 = 32;
-      List var5 = var0.worldObj.a(var0.getClass(), AxisAlignedBB.b((double)var1, (double)var2, (double)var3, (double)var1 + 1.0D, (double)var2 + 1.0D, (double)var3 + 1.0D).grow((double)var4, (double)var4, (double)var4));
+      List var5 = var0.world.a(var0.getClass(), AxisAlignedBB.b((double)var1, (double)var2, (double)var3, (double)var1 + 1.0D, (double)var2 + 1.0D, (double)var3 + 1.0D).grow((double)var4, (double)var4, (double)var4));
       return var5;
    }
 

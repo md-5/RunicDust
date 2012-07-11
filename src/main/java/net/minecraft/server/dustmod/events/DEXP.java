@@ -26,7 +26,7 @@ public class DEXP extends PoweredEvent {
       var1.bf = 0;
       var1.data = 24000;
       var1.setColorBeam(255, 255, 255);
-      ++var1.posY;
+      ++var1.locY;
       int var2 = 1;
       int var3 = 1;
       List var4 = this.getEntities(var1);
@@ -49,14 +49,14 @@ public class DEXP extends PoweredEvent {
                   for(; var3 > 0 && var8.count > 0; --var3) {
                      --var8.count;
                      if(var8.count <= 0) {
-                        var7.setDead();
+                        var7.die();
                      }
                   }
                } else {
                   for(; var2 > 0 && var8.count > 0; --var2) {
                      --var8.count;
                      if(var8.count <= 0) {
-                        var7.setDead();
+                        var7.die();
                      }
                   }
                }
@@ -71,11 +71,11 @@ public class DEXP extends PoweredEvent {
 
    public void onTick(EntityDust var1) {
       super.onTick(var1);
-      if(var1.ticksExisted < 60) {
+      if(var1.ticksLived < 60) {
          var1.renderBeam = false;
       } else {
          var1.renderBeam = true;
-         EntityHuman var2 = var1.worldObj.a(var1.summonerUN);
+         EntityHuman var2 = var1.world.a(var1.summonerUN);
          if(var2 != null) {
             double var3 = (double)var1.getFuel() / 2400.0D;
             int var5 = (int)Math.floor(var3 * 255.0D);
@@ -109,9 +109,9 @@ public class DEXP extends PoweredEvent {
                                  var15 -= var16;
                                  double var17 = (double)(var6 + (Math.random() > 0.5D?1:-1)) + Math.random() * 0.4D - 0.2D;
                                  double var19 = (double)(var8 + (Math.random() > 0.5D?1:-1)) + Math.random() * 0.4D - 0.2D;
-                                 EntityExperienceOrb var21 = new EntityExperienceOrb(var1.worldObj, var17 + 0.5D, (double)var7, var19 + 0.5D, var16);
-                                 var21.motionX = var21.motionY = var21.motionZ = 0.0D;
-                                 var1.worldObj.addEntity(var21);
+                                 EntityExperienceOrb var21 = new EntityExperienceOrb(var1.world, var17 + 0.5D, (double)var7, var19 + 0.5D, var16);
+                                 var21.motX = var21.motY = var21.motZ = 0.0D;
+                                 var1.world.addEntity(var21);
                               }
                            }
 
@@ -120,7 +120,7 @@ public class DEXP extends PoweredEvent {
                            break;
                         }
                      }
-                  } else if(var11 == var2 && var1.ticksExisted % 20 == 0 && var1.ticksExisted != 0) {
+                  } else if(var11 == var2 && var1.ticksLived % 20 == 0 && var1.ticksLived != 0) {
                      var2.damageEntity(DamageSource.MAGIC, 2);
                   }
                }

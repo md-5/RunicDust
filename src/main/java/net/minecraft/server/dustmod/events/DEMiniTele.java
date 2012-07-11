@@ -16,7 +16,7 @@ import net.minecraft.server.dustmod.TileEntityDust;
 public class DEMiniTele extends DustEvent {
 
    public void onInit(EntityDust var1) {
-      World var2 = var1.worldObj;
+      World var2 = var1.world;
       if(!this.takeXP(var1, 5)) {
          var1.fizzle();
       } else {
@@ -95,7 +95,7 @@ public class DEMiniTele extends DustEvent {
                         var8.locY = (double)var19[1] + 0.6D;
                         var8.locZ = (double)var19[2] + 0.5D;
                         var8.yaw = (float)var19[5];
-                        mod_DustMod.getWarpEntity(var19, var1.worldObj);
+                        mod_DustMod.getWarpEntity(var19, var1.world);
                         if(var8 instanceof EntityHuman) {
                            ((EntityHuman)var8).K = 0.9F;
                         }
@@ -109,7 +109,7 @@ public class DEMiniTele extends DustEvent {
          }
       }
 
-      if(var1.ticksExisted > 100) {
+      if(var1.ticksLived > 100) {
          var1.setColorOuter(255, 0, 0);
          var1.setColorInner(255, 0, 0);
          var1.fade();

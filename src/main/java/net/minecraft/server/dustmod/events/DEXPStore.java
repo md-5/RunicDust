@@ -86,7 +86,7 @@ public class DEXPStore extends DustEvent {
    }
 
    public void drop(EntityDust var1) {
-      EntityHuman var2 = var1.worldObj.findNearbyPlayer(var1, 12.0D);
+      EntityHuman var2 = var1.world.findNearbyPlayer(var1, 12.0D);
       if(var2 instanceof EntityHuman) {
          EntityHuman var3 = (EntityHuman)var2;
          var3.levelDown(-var1.data);

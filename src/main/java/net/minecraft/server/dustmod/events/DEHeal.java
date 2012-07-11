@@ -69,7 +69,7 @@ public class DEHeal extends DustEvent {
    }
 
    public void onTick(EntityDust var1) {
-      if(var1.ticksExisted > 100) {
+      if(var1.ticksLived > 100) {
          var1.fade();
       }
 

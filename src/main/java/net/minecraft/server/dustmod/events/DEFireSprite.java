@@ -30,9 +30,9 @@ public class DEFireSprite extends PoweredEvent {
       super.onTick(var1);
       var1.renderStar = true;
       var1.follow = true;
-      EntityHuman var2 = var1.worldObj.a(var1.summonerUN);
+      EntityHuman var2 = var1.world.a(var1.summonerUN);
       if(var2 != null) {
-         var1.setFire(0);
+         var1.setOnFire(0);
          byte var3 = 3;
          List var4 = this.getEntities(var1, (double)var3);
          Iterator var5 = var4.iterator();
@@ -44,7 +44,7 @@ public class DEFireSprite extends PoweredEvent {
             }
          }
 
-         if(var1.ticksExisted % 100 == 0 && Math.random() < 0.5D) {
+         if(var1.ticksLived % 100 == 0 && Math.random() < 0.5D) {
             int var12 = var1.getX();
             int var13 = var1.getY();
             int var7 = var1.getZ();
@@ -53,8 +53,8 @@ public class DEFireSprite extends PoweredEvent {
             for(int var9 = -var3; var9 <= var3 && !var8; ++var9) {
                for(int var10 = -var3; var10 <= var3 && !var8; ++var10) {
                   for(int var11 = -var3; var11 <= var3 && !var8; ++var11) {
-                     if(var1.worldObj.getTypeId(var12 + var9, var13 + var10 - 1, var7 + var11) != 0 && var1.worldObj.getTypeId(var12 + var9, var13 + var10, var7 + var11) == 0 && Math.random() < 0.05D) {
-                        var1.worldObj.setTypeId(var12 + var9, var13 + var10, var7 + var11, Block.FIRE.blockID);
+                     if(var1.world.getTypeId(var12 + var9, var13 + var10 - 1, var7 + var11) != 0 && var1.world.getTypeId(var12 + var9, var13 + var10, var7 + var11) == 0 && Math.random() < 0.05D) {
+                        var1.world.setTypeId(var12 + var9, var13 + var10, var7 + var11, Block.FIRE.id);
                         var8 = true;
                      }
                   }

@@ -26,7 +26,7 @@ public class DECage extends DETrap {
 
    public void onTick(EntityDust var1) {
       var1.renderStar = true;
-      if(var1.ticksExisted < 80) {
+      if(var1.ticksLived < 80) {
          var1.setColorInner(140, 140, 140);
          var1.setColorOuter(140, 140, 140);
       } else {
@@ -57,11 +57,11 @@ public class DECage extends DETrap {
 
             var3 = true;
             EntityLiving var16 = (EntityLiving)var6;
-            int var8 = (int)Math.floor(var16.posX);
-            int var9 = (int)Math.floor(var16.posY - (double)var16.yOffset);
-            int var10 = (int)Math.floor(var16.posZ);
-            var16.setPosition((double)var8 + 0.5D, (double)var9 + (double)var16.yOffset, (double)var10 + 0.5D);
-            World var11 = var1.worldObj;
+            int var8 = (int)Math.floor(var16.locX);
+            int var9 = (int)Math.floor(var16.locY - (double)var16.height);
+            int var10 = (int)Math.floor(var16.locZ);
+            var16.setPosition((double)var8 + 0.5D, (double)var9 + (double)var16.height, (double)var10 + 0.5D);
+            World var11 = var1.world;
 
             for(int var12 = -1; var12 <= 1; ++var12) {
                for(int var13 = 0; var13 <= 1; ++var13) {

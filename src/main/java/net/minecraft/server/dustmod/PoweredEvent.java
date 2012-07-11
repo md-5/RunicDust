@@ -61,7 +61,7 @@ public abstract class PoweredEvent extends DustEvent {
                   ItemStack var6 = var5.itemStack;
                   if(TileEntityFurnace.fuelTime(var6) != 0) {
                      this.addFuel(var1, TileEntityFurnace.fuelTime(var6) * var6.count);
-                     var5.setDead();
+                     var5.die();
                   }
                }
             }

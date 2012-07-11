@@ -12,22 +12,22 @@ public class EntityAIDustApplyHunterVision extends PathfinderGoal {
 
    public EntityAIDustApplyHunterVision(EntityCreature var1) {
       this.theEntity = var1;
-      this.setMutexBits(0);
+      this.a(0);
    }
 
-   public boolean shouldExecute() {
+   public boolean a() {
       return false;
    }
 
-   public void updateTask() {
+   public void e() {
       super.e();
    }
 
-   public boolean continueExecuting() {
+   public boolean b() {
       return false;
    }
 
-   public void resetTask() {}
+   public void d() {}
 
-   public void startExecuting() {}
+   public void c() {}
 }

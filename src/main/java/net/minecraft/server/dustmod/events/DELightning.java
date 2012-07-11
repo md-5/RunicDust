@@ -27,8 +27,8 @@ public class DELightning extends DETrap {
 
       while(var4.hasNext()) {
          Entity var5 = (Entity)var4.next();
-         if(var5 instanceof EntityLiving && (double)var1.getDistanceToEntity(var5) < 2.0D * (double)var2) {
-            var1.worldObj.strikeLightning(new EntityWeatherLighting(var1.worldObj, var1.posX, var1.posY - 0.0D, var1.posZ));
+         if(var5 instanceof EntityLiving && (double)var1.i(var5) < 2.0D * (double)var2) {
+            var1.world.strikeLightning(new EntityWeatherLighting(var1.world, var1.locX, var1.locY - 0.0D, var1.locZ));
             var1.fade();
          }
       }

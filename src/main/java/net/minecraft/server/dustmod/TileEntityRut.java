@@ -17,8 +17,8 @@ public class TileEntityRut extends TileEntity {
    public int fluid;
    public int[][][] ruts = new int[3][3][3];
    public boolean isBeingUsed = false;
-   public boolean isDead = false;
-   public int ticksExisted = 0;
+   public boolean dead = false;
+   public int ticksLived = 0;
    public boolean[][][] neighborSolid = (boolean[][][])null;
    public boolean changed = true;
 
@@ -40,30 +40,30 @@ public class TileEntityRut extends TileEntity {
       return var1;
    }
 
-   public void updateEntity() {
+   public void q_() {
       super.q_();
       if(this.neighborSolid == null) {
          this.neighborSolid = new boolean[3][3][3];
          this.updateNeighbors();
       }
 
-      if(!this.isEmpty() && (!(Block.byId[this.maskBlock] instanceof BlockSand) || !BlockSand.canFall(this.worldObj, this.xCoord, this.yCoord - 1, this.zCoord))) {
+      if(!this.isEmpty() && (!(Block.byId[this.maskBlock] instanceof BlockSand) || !BlockSand.canFall(this.world, this.x, this.y - 1, this.z))) {
          int var1;
          int var2;
          int var3;
          int var4;
-         if(this.worldObj.getTime() % 14L == 0L && this.prevFluid == this.fluid && this.fluidIsFluid()) {
-            this.worldObj.setRawData(this.xCoord, this.yCoord, this.zCoord, this.maskMeta);
-            var1 = this.xCoord;
-            var2 = this.yCoord;
-            var3 = this.zCoord;
+         if(this.world.getTime() % 14L == 0L && this.prevFluid == this.fluid && this.fluidIsFluid()) {
+            this.world.setRawData(this.x, this.y, this.z, this.maskMeta);
+            var1 = this.x;
+            var2 = this.y;
+            var3 = this.z;
             super.q_();
 
             for(var4 = -1; var4 <= 1; ++var4) {
                for(int var5 = -1; var5 <= 0; ++var5) {
                   for(int var6 = -1; var6 <= 1; ++var6) {
-                     if((var4 != -1 && var4 != 1 || var4 != var5 || var6 != -1 && var6 != 1) && (var4 != -1 && var4 != 1 || var5 != -1 && var5 != 1 || var4 == var5 || var6 != -1 && var6 != 1) && (var5 != 0 || var4 != -1 && var4 != 1 || var6 != -1 && var6 != 1) && this.worldObj.getTypeId(var1 + var4, var2 + var5, var3 + var6) == mod_DustMod.rutBlock.id) {
-                        TileEntityRut var7 = (TileEntityRut)this.worldObj.getTileEntity(var1 + var4, var2 + var5, var3 + var6);
+                     if((var4 != -1 && var4 != 1 || var4 != var5 || var6 != -1 && var6 != 1) && (var4 != -1 && var4 != 1 || var5 != -1 && var5 != 1 || var4 == var5 || var6 != -1 && var6 != 1) && (var5 != 0 || var4 != -1 && var4 != 1 || var6 != -1 && var6 != 1) && this.world.getTypeId(var1 + var4, var2 + var5, var3 + var6) == mod_DustMod.rutBlock.id) {
+                        TileEntityRut var7 = (TileEntityRut)this.world.getTileEntity(var1 + var4, var2 + var5, var3 + var6);
                         if(var7.fluid == 0) {
                            var7.setFluid(this.fluid);
                         } else if(var7.fluid == Block.STATIONARY_WATER.id && this.fluid == Block.STATIONARY_LAVA.id) {
@@ -79,12 +79,12 @@ public class TileEntityRut extends TileEntity {
             }
          }
 
-         if(this.worldObj.getTime() % 60L == 0L && this.fluid == 0) {
+         if(this.world.getTime() % 60L == 0L && this.fluid == 0) {
             for(var1 = -1; var1 <= 1; ++var1) {
                for(var2 = -1; var2 <= 1; ++var2) {
                   for(var3 = -1; var3 <= 1; ++var3) {
                      if(var1 == var2 || var1 == var3 || var2 == var3) {
-                        var4 = this.worldObj.getTypeId(this.xCoord + var1, this.yCoord + var2, this.zCoord + var3);
+                        var4 = this.world.getTypeId(this.x + var1, this.y + var2, this.z + var3);
                         if(this.fluid == 0) {
                            if(var4 != Block.STATIONARY_LAVA.id && var4 != Block.LAVA.id) {
                               if(var4 == Block.STATIONARY_WATER.id || var4 == Block.WATER.id) {
@@ -102,9 +102,9 @@ public class TileEntityRut extends TileEntity {
 
          this.prevFluid = this.fluid;
       } else {
-         this.isDead = true;
-         this.worldObj.setTypeIdAndData(this.xCoord, this.yCoord, this.zCoord, this.maskBlock, this.maskMeta);
-         this.invalidate();
+         this.dead = true;
+         this.world.setTypeIdAndData(this.x, this.y, this.z, this.maskBlock, this.maskMeta);
+         this.j();
       }
    }
 
@@ -118,7 +118,7 @@ public class TileEntityRut extends TileEntity {
       for(int var1 = -1; var1 <= 1; ++var1) {
          for(int var2 = -1; var2 <= 1; ++var2) {
             for(int var3 = -1; var3 <= 1; ++var3) {
-               int var4 = this.worldObj.getTypeId(this.xCoord + var1, this.yCoord + var2, this.zCoord + var3);
+               int var4 = this.world.getTypeId(this.x + var1, this.y + var2, this.z + var3);
                this.neighborSolid[var1 + 1][var2 + 1][var3 + 1] = var4 != 0 && (Block.byId[var4].a() || Block.byId[var4] == mod_DustMod.rutBlock);
             }
          }
@@ -134,7 +134,7 @@ public class TileEntityRut extends TileEntity {
       return this.neighborSolid[var1 + 1][var2 + 1][var3 + 1];
    }
 
-   public void writeToNBT(NBTTagCompound var1) {
+   public void b(NBTTagCompound var1) {
       super.b(var1);
       var1.setInt("maskBlock", this.maskBlock);
       var1.setInt("maskMeta", this.maskMeta);
@@ -151,7 +151,7 @@ public class TileEntityRut extends TileEntity {
 
    }
 
-   public void readFromNBT(NBTTagCompound var1) {
+   public void a(NBTTagCompound var1) {
       super.a(var1);
       if(var1.hasKey("maskBlock")) {
          this.maskBlock = var1.getInt("maskBlock");
@@ -205,7 +205,7 @@ public class TileEntityRut extends TileEntity {
          }
 
          System.out.println("Setting [" + var1 + "," + var2 + "," + var3 + "]");
-         mod_DustMod.notifyBlockChange(this.worldObj, this.xCoord, this.yCoord, this.zCoord, 0);
+         mod_DustMod.notifyBlockChange(this.world, this.x, this.y, this.z, 0);
       }
    }
 
@@ -214,8 +214,8 @@ public class TileEntityRut extends TileEntity {
    }
 
    public void resetBlock() {
-      this.isDead = true;
-      this.worldObj.setTypeIdAndData(this.xCoord, this.yCoord, this.zCoord, this.maskBlock, this.maskMeta);
+      this.dead = true;
+      this.world.setTypeIdAndData(this.x, this.y, this.z, this.maskBlock, this.maskMeta);
    }
 
    public boolean fluidIsFluid() {
@@ -226,7 +226,7 @@ public class TileEntityRut extends TileEntity {
    public void setFluid(int var1) {
       if(this.fluid != var1) {
          this.fluid = var1;
-         mod_DustMod.notifyBlockChange(this.worldObj, this.xCoord, this.yCoord, this.zCoord, 0);
+         mod_DustMod.notifyBlockChange(this.world, this.x, this.y, this.z, 0);
          this.changed = true;
       }
 

@@ -10,7 +10,7 @@ import net.minecraft.server.mod_DustMod;
 
 public class ItemDust extends ItemReed {
 
-   private int blockID;
+   private int id;
    private int plantTex;
    private int gunTex;
    private int lapisTex;
@@ -19,16 +19,16 @@ public class ItemDust extends ItemReed {
 
    public ItemDust(int var1, Block var2) {
       super(var1, var2);
-      this.blockID = var2.id;
-      this.setMaxDamage(0);
-      this.setHasSubtypes(true);
+      this.id = var2.id;
+      this.setMaxDurability(0);
+      this.a(true);
       this.plantTex = ModLoader.addOverride("/gui/items.png", mod_DustMod.path + "/plantdust.png");
       this.gunTex = ModLoader.addOverride("/gui/items.png", mod_DustMod.path + "/gundust.png");
       this.lapisTex = ModLoader.addOverride("/gui/items.png", mod_DustMod.path + "/lapisdust.png");
       this.blazeTex = ModLoader.addOverride("/gui/items.png", mod_DustMod.path + "/blazedust.png");
    }
 
-   public boolean onItemUse(ItemStack var1, EntityHuman var2, World var3, int var4, int var5, int var6, int var7) {
+   public boolean a(ItemStack var1, EntityHuman var2, World var3, int var4, int var5, int var6, int var7) {
       int var8 = var3.getTypeId(var4, var5, var6);
       if(var8 == Block.SNOW.id) {
          var7 = 0;
@@ -62,14 +62,14 @@ public class ItemDust extends ItemReed {
          return false;
       } else if(!var2.d(var4, var5, var6)) {
          return false;
-      } else if(var5 == var3.getHeight() - 1 && Block.byId[this.blockID].material.isBuildable()) {
+      } else if(var5 == var3.getHeight() - 1 && Block.byId[this.id].material.isBuildable()) {
          return false;
-      } else if(var3.mayPlace(this.blockID, var4, var5, var6, true, var7)) {
-         Block var10000 = Block.byId[this.blockID];
-         if(var3.setTypeIdAndData(var4, var5, var6, this.blockID, this.getMetadata(var1.getData()))) {
-            if(var3.getTypeId(var4, var5, var6) == this.blockID) {
-               Block.byId[this.blockID].postPlace(var3, var4, var5, var6, var7);
-               Block.byId[this.blockID].postPlace(var3, var4, var5, var6, var2);
+      } else if(var3.mayPlace(this.id, var4, var5, var6, true, var7)) {
+         Block var10000 = Block.byId[this.id];
+         if(var3.setTypeIdAndData(var4, var5, var6, this.id, this.filterData(var1.getData()))) {
+            if(var3.getTypeId(var4, var5, var6) == this.id) {
+               Block.byId[this.id].a(var3, var4, var5, var6, var7);
+               Block.byId[this.id].a(var3, var4, var5, var6, var2);
             }
 
             if(!var2.abilities.canInstantlyBuild) {
@@ -79,15 +79,15 @@ public class ItemDust extends ItemReed {
 
          return true;
       } else {
-         if(var3.getTypeId(var4, var5, var6) == this.blockID) {
-            Block.byId[this.blockID].interact(var3, var4, var5, var6, var2);
+         if(var3.getTypeId(var4, var5, var6) == this.id) {
+            Block.byId[this.id].interact(var3, var4, var5, var6, var2);
          }
 
          return false;
       }
    }
 
-   public String getItemNameIS(ItemStack var1) {
+   public String a(ItemStack var1) {
       switch(var1.getData()) {
       case 1:
          return "tile.plantdust";

@@ -24,14 +24,14 @@ public class DEFireRain extends PoweredEvent {
       byte var2 = 100;
       byte var3 = 20;
 
-      for(int var4 = 0; var4 < var3 && var1.ticksExisted % 5 == 0; ++var4) {
-         EntityArrow var5 = new EntityArrow(var1.worldObj, var1.posX + Math.random() * (double)var2 * 2.0D - (double)var2, 158.0D, var1.posZ + Math.random() * (double)var2 * 2.0D - (double)var2);
-         var5.motionX = 0.0D;
-         var5.motionY = -2.0D;
-         var5.motionZ = 0.0D;
-         var5.setFire(100);
+      for(int var4 = 0; var4 < var3 && var1.ticksLived % 5 == 0; ++var4) {
+         EntityArrow var5 = new EntityArrow(var1.world, var1.locX + Math.random() * (double)var2 * 2.0D - (double)var2, 158.0D, var1.locZ + Math.random() * (double)var2 * 2.0D - (double)var2);
+         var5.motX = 0.0D;
+         var5.motY = -2.0D;
+         var5.motZ = 0.0D;
+         var5.setOnFire(100);
          var5.fromPlayer = false;
-         var1.worldObj.addEntity(var5);
+         var1.world.addEntity(var5);
       }
 
    }

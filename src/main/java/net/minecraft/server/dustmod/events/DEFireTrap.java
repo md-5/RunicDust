@@ -60,8 +60,8 @@ public class DEFireTrap extends DETrap {
       for(int var12 = -var5; var12 <= var5; ++var12) {
          for(int var13 = -var5; var13 <= var5; ++var13) {
             for(int var14 = -var5; var14 <= var5; ++var14) {
-               if(var1.worldObj.getTypeId(var15 + var12, var16 + var13 - 1, var11 + var14) != 0 && var1.worldObj.getTypeId(var15 + var12, var16 + var13, var11 + var14) == 0 && Math.random() < var3) {
-                  var1.worldObj.setTypeId(var15 + var12, var16 + var13, var11 + var14, Block.FIRE.blockID);
+               if(var1.world.getTypeId(var15 + var12, var16 + var13 - 1, var11 + var14) != 0 && var1.world.getTypeId(var15 + var12, var16 + var13, var11 + var14) == 0 && Math.random() < var3) {
+                  var1.world.setTypeId(var15 + var12, var16 + var13, var11 + var14, Block.FIRE.id);
                }
             }
          }

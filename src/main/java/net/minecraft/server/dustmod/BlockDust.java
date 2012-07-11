@@ -25,26 +25,26 @@ public class BlockDust extends BlockContainer {
 
    public BlockDust(int var1, int var2) {
       super(var1, var2, Material.ORIENTABLE);
-      this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+      this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
    }
 
-   public int getBlockTextureFromSideAndMetadata(int var1, int var2) {
-      return this.blockIndexInTexture;
+   public int a(int var1, int var2) {
+      return this.textureId;
    }
 
-   public AxisAlignedBB getCollisionBoundingBoxFromPool(World var1, int var2, int var3, int var4) {
+   public AxisAlignedBB e(World var1, int var2, int var3, int var4) {
       return null;
    }
 
-   public boolean isOpaqueCube() {
+   public boolean a() {
       return false;
    }
 
-   public boolean renderAsNormalBlock() {
+   public boolean b() {
       return false;
    }
 
-   public void onEntityCollidedWithBlock(World var1, int var2, int var3, int var4, Entity var5) {
+   public void a(World var1, int var2, int var3, int var4, Entity var5) {
       EntityHuman var7;
       if(var5 instanceof EntityItem) {
          EntityItem var6 = (EntityItem)var5;
@@ -55,7 +55,7 @@ public class BlockDust extends BlockContainer {
             return;
          }
 
-         double var8 = (double)var7.getDistanceToEntity(var6);
+         double var8 = (double)var7.i(var6);
          if(var8 > 1.6D) {
             var6.pickupDelay = 5;
          }
@@ -66,15 +66,15 @@ public class BlockDust extends BlockContainer {
          var10.b = 0;
          var7 = var1.findNearbyPlayer(var10, 3.0D);
          if(var7 == null) {
-            var10.setPosition(var10.prevPosX, var10.prevPosY, var10.prevPosZ);
+            var10.setPosition(var10.lastX, var10.lastY, var10.lastZ);
             return;
          }
       }
 
    }
 
-   public void onBlockPlacedBy(World var1, int var2, int var3, int var4, EntityLiving var5) {
-      super.onBlockPlacedBy(var1, var2, var3, var4, var5);
+   public void a(World var1, int var2, int var3, int var4, EntityLiving var5) {
+      super.a(var1, var2, var3, var4, var5);
       this.blockActivated(var1, var2, var3, var4, (EntityHuman)var5);
       if(((EntityHuman)var5).U() != null) {
          ++((EntityHuman)var5).U().count;
@@ -82,12 +82,12 @@ public class BlockDust extends BlockContainer {
 
    }
 
-   public boolean canPlaceBlockAt(World var1, int var2, int var3, int var4) {
+   public boolean a(World var1, int var2, int var3, int var4) {
       Block var5 = Block.byId[var1.getTypeId(var2, var3 - 1, var4)];
       return var5 == null?false:var5.b() || var5 == Block.GLASS;
    }
 
-   public int getRenderType() {
+   public int c() {
       return mod_DustMod.dustModelID;
    }
 
@@ -106,7 +106,7 @@ public class BlockDust extends BlockContainer {
       }
    }
 
-   public void onNeighborBlockChange(World var1, int var2, int var3, int var4, int var5) {
+   public void a(World var1, int var2, int var3, int var4, int var5) {
       int var6 = var1.getData(var2, var3, var4);
       if(var1.getTypeId(var2, var3 - 1, var4) != 0 && Block.byId[var1.getTypeId(var2, var3 - 1, var4)].material.isBuildable()) {
          if(var1.isBlockIndirectlyPowered(var2, var3, var4) && var6 == 0) {
@@ -117,10 +117,10 @@ public class BlockDust extends BlockContainer {
          var1.setTypeId(var2, var3, var4, 0);
       }
 
-      super.onNeighborBlockChange(var1, var2, var3, var4, var5);
+      super.a(var1, var2, var3, var4, var5);
    }
 
-   public void onBlockRemoval(World var1, int var2, int var3, int var4) {
+   public void d(World var1, int var2, int var3, int var4) {
       if(var1.getData(var2, var3, var4) > 0) {
          var1.setTypeId(var2, var3, var4, 0);
       } else {
@@ -133,7 +133,7 @@ public class BlockDust extends BlockContainer {
             for(int var7 = 0; var7 < 4; ++var7) {
                int var8 = var5.getDust(var6, var7);
                if(var8 > 0) {
-                  this.dropBlockAsItem_do(var1, var2, var3, var4, new ItemStack(mod_DustMod.idust.id, 1, var8));
+                  this.a(var1, var2, var3, var4, new ItemStack(mod_DustMod.idust.id, 1, var8));
                }
             }
          }
@@ -154,7 +154,7 @@ public class BlockDust extends BlockContainer {
          return false;
       } else if(var5.isSneaking()) {
          if(var5.U() == null || var5.U().id != mod_DustMod.tome.id) {
-            this.onBlockClicked(var1, var2, var3, var4, var5);
+            this.b(var1, var2, var3, var4, var5);
          }
 
          return false;
@@ -164,20 +164,20 @@ public class BlockDust extends BlockContainer {
          return true;
       } else {
          if(var5.U() != null && var5.U().id == mod_DustMod.spiritSword.id) {
-            this.onBlockClicked(var1, var2, var3, var4, var5);
+            this.b(var1, var2, var3, var4, var5);
          }
 
          if(var5.U() != null && var5.U().id == mod_DustMod.idust.id) {
             int var6 = var5.U().getData();
-            Vec3D var7 = var5.getLookVec();
+            Vec3D var7 = var5.aJ();
             double var8 = var7.a;
             double var10 = var7.b;
             double var12 = var7.c;
 
             for(double var14 = 0.0D; var14 < 4.0D; var14 += 0.01D) {
-               double var16 = var5.posX + var8 * var14;
-               double var18 = var5.posY + (double)var5.getHeadHeight() + var10 * var14;
-               double var20 = var5.posZ + var12 * var14;
+               double var16 = var5.locX + var8 * var14;
+               double var18 = var5.locY + (double)var5.getHeadHeight() + var10 * var14;
+               double var20 = var5.locZ + var12 * var14;
                if(var18 - (double)var3 <= 0.02D) {
                   double var22 = Math.abs(var16 - (double)var2) - 0.02D;
                   double var24 = Math.abs(var20 - (double)var4) - 0.02D;
@@ -255,8 +255,8 @@ public class BlockDust extends BlockContainer {
             for(var7 = -1; var7 <= 1; ++var7) {
                for(int var15 = -1; var15 <= 1; ++var15) {
                   if(var7 == 0 || var15 == 0) {
-                     int var9 = var1.xCoord;
-                     int var10 = var1.zCoord;
+                     int var9 = var1.x;
+                     int var10 = var1.z;
                      int var11 = var2 + var7;
                      int var12 = var3 + var15;
                      if(var11 < 0) {
@@ -275,9 +275,9 @@ public class BlockDust extends BlockContainer {
                         ++var10;
                      }
 
-                     TileEntity var13 = var1.worldObj.getTileEntity(var9, var1.yCoord, var10);
+                     TileEntity var13 = var1.world.getTileEntity(var9, var1.y, var10);
                      if(var13 instanceof TileEntityDust) {
-                        mod_DustMod.notifyBlockChange(var1.worldObj, var9, var1.yCoord, var10, 0);
+                        mod_DustMod.notifyBlockChange(var1.world, var9, var1.y, var10, 0);
                         TileEntityDust var14 = (TileEntityDust)var13;
                         this.setVariableDust(var14, var11, var12, var4, var5);
                      }
@@ -289,20 +289,20 @@ public class BlockDust extends BlockContainer {
       }
    }
 
-   public TileEntity getBlockEntity() {
+   public TileEntity a_() {
       return new TileEntityDust();
    }
 
-   public void onBlockClicked(World var1, int var2, int var3, int var4, EntityHuman var5) {
-      Vec3D var6 = var5.getLookVec();
+   public void b(World var1, int var2, int var3, int var4, EntityHuman var5) {
+      Vec3D var6 = var5.aJ();
       double var7 = var6.a;
       double var9 = var6.b;
       double var11 = var6.c;
 
       for(double var13 = 0.0D; var13 < 4.0D; var13 += 0.01D) {
-         double var15 = var5.posX + var7 * var13;
-         double var17 = var5.posY + (double)var5.getHeadHeight() + var9 * var13;
-         double var19 = var5.posZ + var11 * var13;
+         double var15 = var5.locX + var7 * var13;
+         double var17 = var5.locY + (double)var5.getHeadHeight() + var9 * var13;
+         double var19 = var5.locZ + var11 * var13;
          if(var17 - (double)var3 <= 0.02D) {
             double var21 = Math.abs(var15 - (double)var2) - 0.02D;
             double var23 = Math.abs(var19 - (double)var4) - 0.02D;
@@ -327,7 +327,7 @@ public class BlockDust extends BlockContainer {
             TileEntityDust var27 = (TileEntityDust)var1.getTileEntity(var2, var3, var4);
             if(var27.getDust(var25, var26) != 0 && var1.getData(var2, var3, var4) == 0) {
                if(var27.getDust(var25, var26) > 0 && !var5.abilities.canInstantlyBuild) {
-                  this.dropBlockAsItem_do(var1, var2, var3, var4, new ItemStack(mod_DustMod.idust.id, 1, var27.getDust(var25, var26)));
+                  this.a(var1, var2, var3, var4, new ItemStack(mod_DustMod.idust.id, 1, var27.getDust(var25, var26)));
                }
 
                var1.makeSound((double)((float)var2 + 0.5F), (double)((float)var3 + 0.5F), (double)((float)var4 + 0.5F), this.stepSound.getName(), (this.stepSound.getVolume1() + 1.0F) / 6.0F, this.stepSound.getVolume2() * 0.99F);
@@ -335,7 +335,7 @@ public class BlockDust extends BlockContainer {
                var27.setDust(var25, var26, 0);
                if(var27.isEmpty() && var1.getData(var2, var3, var4) != 10) {
                   var1.setTypeId(var2, var3, var4, 0);
-                  this.onBlockDestroyedByPlayer(var1, var2, var3, var4, 0);
+                  this.a(var1, var2, var3, var4, 0);
                }
             }
             break;
@@ -344,7 +344,7 @@ public class BlockDust extends BlockContainer {
 
    }
 
-   public int idDropped(int var1, Random var2, int var3) {
+   public int a(int var1, Random var2, int var3) {
       return 0;
    }
 
@@ -356,7 +356,7 @@ public class BlockDust extends BlockContainer {
 
          while(var7.hasNext()) {
             Integer[] var8 = (Integer[])var7.next();
-            if(var1.getTypeId(var8[0].intValue(), var3, var8[2].intValue()) == this.blockID) {
+            if(var1.getTypeId(var8[0].intValue(), var3, var8[2].intValue()) == this.id) {
                var1.setData(var8[0].intValue(), var3, var8[2].intValue(), 1);
             }
          }
@@ -393,7 +393,7 @@ public class BlockDust extends BlockContainer {
 
          for(int var15 = 0; var15 <= var23; ++var15) {
             for(int var16 = 0; var16 <= var13; ++var16) {
-               if(var1.getTypeId(var15 + var20, var3, var16 + var21) == this.blockID) {
+               if(var1.getTypeId(var15 + var20, var3, var16 + var21) == this.id) {
                   TileEntityDust var17 = (TileEntityDust)var1.getTileEntity(var15 + var20, var3, var16 + var21);
 
                   for(int var18 = 0; var18 < var22; ++var18) {
@@ -412,7 +412,7 @@ public class BlockDust extends BlockContainer {
    public void addNeighbors(World var1, int var2, int var3, int var4, List var5) {
       for(int var6 = -1; var6 <= 1; ++var6) {
          for(int var7 = -1; var7 <= 1; ++var7) {
-            if(var1.getTypeId(var2 + var6, var3, var4 + var7) == this.blockID && var1.getData(var2 + var6, var3, var4 + var7) == 0) {
+            if(var1.getTypeId(var2 + var6, var3, var4 + var7) == this.id && var1.getData(var2 + var6, var3, var4 + var7) == 0) {
                boolean var8 = true;
                Iterator var9 = var5.iterator();
 

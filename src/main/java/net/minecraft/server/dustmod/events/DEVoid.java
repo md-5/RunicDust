@@ -40,7 +40,7 @@ public class DEVoid extends DustEvent {
 
    public void onTick(EntityDust var1) {
       if(var1.data == 1) {
-         if(var1.ticksExisted > 100) {
+         if(var1.ticksLived > 100) {
             var1.fade();
             ArrayList var2 = mod_DustMod.getVoidInventory(var1);
             if(var2 == null) {
@@ -52,10 +52,10 @@ public class DEVoid extends DustEvent {
             while(var3.hasNext()) {
                ItemStack var4 = (ItemStack)var3.next();
                EntityItem var5 = null;
-               var5 = new EntityItem(var1.worldObj, var1.posX, var1.posY - 0.0D, var1.posZ, var4);
+               var5 = new EntityItem(var1.world, var1.locX, var1.locY - 0.0D, var1.locZ, var4);
                if(var5 != null) {
-                  var5.setPosition(var1.posX, var1.posY, var1.posZ);
-                  var1.worldObj.addEntity(var5);
+                  var5.setPosition(var1.locX, var1.locY, var1.locZ);
+                  var1.world.addEntity(var5);
                }
             }
 
@@ -63,13 +63,13 @@ public class DEVoid extends DustEvent {
             mod_DustMod.updateVoidInventory();
          }
       } else {
-         if(var1.ticksExisted > 35) {
-            var1.ticksExisted += 3;
+         if(var1.ticksLived > 35) {
+            var1.ticksLived += 3;
             var1.starScale = (float)((double)var1.starScale - 0.001D);
          }
 
-         if(var1.ticksExisted > 100) {
-            var1.kill();
+         if(var1.ticksLived > 100) {
+            var1.aI();
          }
       }
 

@@ -12,21 +12,21 @@ import net.minecraft.server.dustmod.DustShape;
 
 public class ItemPlaceScroll extends Item {
 
-   private int blockID;
+   private int id;
 
 
    public ItemPlaceScroll(int var1) {
       super(var1);
-      this.blockID = mod_DustMod.dust.id;
-      this.setMaxDamage(0);
-      this.setHasSubtypes(true);
-      this.setMaxStackSize(4);
-      this.setIconIndex(ModLoader.addOverride("/gui/items.png", mod_DustMod.path + "/scroll.png"));
+      this.id = mod_DustMod.dust.id;
+      this.setMaxDurability(0);
+      this.a(true);
+      this.e(4);
+      this.d(ModLoader.addOverride("/gui/items.png", mod_DustMod.path + "/scroll.png"));
    }
 
-   public boolean onItemUse(ItemStack var1, EntityHuman var2, World var3, int var4, int var5, int var6, int var7) {
+   public boolean a(ItemStack var1, EntityHuman var2, World var3, int var4, int var5, int var6, int var7) {
       DustShape var8 = DustManager.getShapeFromID(var1.getData());
-      int var9 = MathHelper.floor((double)(var2.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+      int var9 = MathHelper.floor((double)(var2.yaw * 4.0F / 360.0F) + 0.5D) & 3;
       if(mod_DustMod.isDust(var3.getTypeId(var4, var5, var6))) {
          --var5;
       }
@@ -38,11 +38,11 @@ public class ItemPlaceScroll extends Item {
       return true;
    }
 
-   public String getItemNameIS(ItemStack var1) {
+   public String a(ItemStack var1) {
       return "tile.scroll" + DustManager.getShapeFromID(var1.getData()).name;
    }
 
    public String getLocalItemName(ItemStack var1) {
-      return this.getItemNameIS(var1);
+      return this.a(var1);
    }
 }

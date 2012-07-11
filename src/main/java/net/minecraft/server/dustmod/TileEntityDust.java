@@ -25,7 +25,7 @@ public class TileEntityDust extends TileEntity implements IInventory {
    private int[][] pattern = new int[4][4];
    private boolean[] dusts;
    private int toDestroy = -1;
-   private int ticksExisted = 0;
+   private int ticksLived = 0;
    private EntityDust entityDust = null;
    public List transaction = new ArrayList();
 
@@ -58,7 +58,7 @@ public class TileEntityDust extends TileEntity implements IInventory {
       this.entityDust = var1;
    }
 
-   public void writeToNBT(NBTTagCompound var1) {
+   public void b(NBTTagCompound var1) {
       super.b(var1);
 
       for(int var2 = 0; var2 < 4; ++var2) {
@@ -68,10 +68,10 @@ public class TileEntityDust extends TileEntity implements IInventory {
       }
 
       var1.setInt("toDestroy", this.toDestroy);
-      var1.setInt("ticks", this.ticksExisted);
+      var1.setInt("ticks", this.ticksLived);
    }
 
-   public void readFromNBT(NBTTagCompound var1) {
+   public void a(NBTTagCompound var1) {
       super.a(var1);
 
       for(int var2 = 0; var2 < 4; ++var2) {
@@ -85,7 +85,7 @@ public class TileEntityDust extends TileEntity implements IInventory {
       }
 
       if(var1.hasKey("ticks")) {
-         this.ticksExisted = var1.getInt("ticks");
+         this.ticksLived = var1.getInt("ticks");
       }
 
    }
@@ -93,7 +93,7 @@ public class TileEntityDust extends TileEntity implements IInventory {
    public void setDust(int var1, int var2, int var3) {
       this.pattern[var1][var2] = var3;
       this.dusts = null;
-      this.onInventoryChanged();
+      // this.onInventoryChanged(); TODO WTF
    }
 
    public int[][] getPattern() {
@@ -104,22 +104,22 @@ public class TileEntityDust extends TileEntity implements IInventory {
       return this.pattern[var1][var2];
    }
 
-   public void updateEntity() {
+   public void q_() {
       super.q_();
-      if(this.ticksExisted > 0 && this.isEmpty() && this.worldObj.getData(this.xCoord, this.yCoord, this.zCoord) != 10) {
-         this.worldObj.setTypeId(this.xCoord, this.yCoord, this.zCoord, 0);
+      if(this.ticksLived > 0 && this.isEmpty() && this.world.getData(this.x, this.y, this.z) != 10) {
+         this.world.setTypeId(this.x, this.y, this.z, 0);
          System.out.println("Killing, empty");
-         this.invalidate();
+         this.j();
       } else {
-         ++this.ticksExisted;
+         ++this.ticksLived;
          if(this.toDestroy == 0) {
-            if(this.worldObj.getData(this.xCoord, this.yCoord, this.zCoord) != 2) {
+            if(this.world.getData(this.x, this.y, this.z) != 2) {
                this.toDestroy = -1;
                return;
             }
 
             for(int var1 = 0; (double)var1 < Math.random() * 2.0D + 2.0D; ++var1) {
-               this.worldObj.a("smoke", (double)this.xCoord + Math.random(), (double)this.yCoord + Math.random() / 2.0D, (double)this.zCoord + Math.random(), 0.07D, 0.01D, 0.07D);
+               this.world.a("smoke", (double)this.x + Math.random(), (double)this.y + Math.random() / 2.0D, (double)this.z + Math.random(), 0.07D, 0.01D, 0.07D);
             }
 
             ArrayList var4 = new ArrayList();
@@ -141,17 +141,17 @@ public class TileEntityDust extends TileEntity implements IInventory {
             var3 = ((Integer)var4.get(var5.nextInt(var4.size()))).intValue();
             this.setDust((int)Math.floor((double)(var3 / 4)), var3 % 4, 0);
             this.toDestroy = (int)Math.round(Math.random() * 200.0D + 100.0D);
-            this.worldObj.notify(this.xCoord, this.yCoord, this.zCoord);
-            if(this.isEmpty() && this.worldObj.getData(this.xCoord, this.yCoord, this.zCoord) != 10) {
-               this.worldObj.setTypeId(this.xCoord, this.yCoord, this.zCoord, 0);
-               this.worldObj.setTileEntity(this.xCoord, this.yCoord, this.zCoord, (TileEntity)null);
-               this.invalidate();
+            this.world.notify(this.x, this.y, this.z);
+            if(this.isEmpty() && this.world.getData(this.x, this.y, this.z) != 10) {
+               this.world.setTypeId(this.x, this.y, this.z, 0);
+               this.world.setTileEntity(this.x, this.y, this.z, (TileEntity)null);
+               this.j();
             }
          } else if(this.toDestroy > 0) {
             --this.toDestroy;
          }
 
-         if(this.ticksExisted % 100 == 0 && this.toDestroy <= -1 && this.getBlockMetadata() == 2) {
+         if(this.ticksLived % 100 == 0 && this.toDestroy <= -1 && this.k() == 2) {
             this.toDestroy = (int)Math.round(Math.random() * 200.0D + 100.0D);
          }
 
@@ -179,32 +179,32 @@ public class TileEntityDust extends TileEntity implements IInventory {
       }
 
       TileEntityDust var5;
-      if(mod_DustMod.isDust(this.worldObj.getTypeId(this.xCoord - 1, this.yCoord, this.zCoord))) {
-         var5 = (TileEntityDust)this.worldObj.getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
+      if(mod_DustMod.isDust(this.world.getTypeId(this.x - 1, this.y, this.z))) {
+         var5 = (TileEntityDust)this.world.getTileEntity(this.x - 1, this.y, this.z);
 
          for(var4 = 0; var4 < 4; ++var4) {
             var2[0][var4 + 1] = var5.pattern[3][var4];
          }
       }
 
-      if(mod_DustMod.isDust(this.worldObj.getTypeId(this.xCoord + 1, this.yCoord, this.zCoord))) {
-         var5 = (TileEntityDust)this.worldObj.getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
+      if(mod_DustMod.isDust(this.world.getTypeId(this.x + 1, this.y, this.z))) {
+         var5 = (TileEntityDust)this.world.getTileEntity(this.x + 1, this.y, this.z);
 
          for(var4 = 0; var4 < 4; ++var4) {
             var2[5][var4 + 1] = var5.pattern[0][var4];
          }
       }
 
-      if(mod_DustMod.isDust(this.worldObj.getTypeId(this.xCoord, this.yCoord, this.zCoord - 1))) {
-         var5 = (TileEntityDust)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
+      if(mod_DustMod.isDust(this.world.getTypeId(this.x, this.y, this.z - 1))) {
+         var5 = (TileEntityDust)this.world.getTileEntity(this.x, this.y, this.z - 1);
 
          for(var4 = 0; var4 < 4; ++var4) {
             var2[var4 + 1][0] = var5.pattern[var4][3];
          }
       }
 
-      if(mod_DustMod.isDust(this.worldObj.getTypeId(this.xCoord, this.yCoord, this.zCoord + 1))) {
-         var5 = (TileEntityDust)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
+      if(mod_DustMod.isDust(this.world.getTypeId(this.x, this.y, this.z + 1))) {
+         var5 = (TileEntityDust)this.world.getTileEntity(this.x, this.y, this.z + 1);
 
          for(var4 = 0; var4 < 4; ++var4) {
             var2[var4 + 1][5] = var5.pattern[var4][0];
@@ -312,11 +312,11 @@ public class TileEntityDust extends TileEntity implements IInventory {
       }
 
       var1.toDestroy = this.toDestroy;
-      var1.ticksExisted = this.ticksExisted;
-      var2 = var1.xCoord;
-      int var3 = var1.yCoord;
-      int var4 = var1.zCoord;
-      var1.worldObj.setRawData(var2, var3, var4, this.worldObj.getData(this.xCoord, this.yCoord, this.zCoord));
+      var1.ticksLived = this.ticksLived;
+      var2 = var1.x;
+      int var3 = var1.y;
+      int var4 = var1.z;
+      var1.world.setRawData(var2, var3, var4, this.world.getData(this.x, this.y, this.z));
    }
 
    public void onDataPacket(NetworkManager var1, Packet132TileEntityData var2) {
@@ -356,7 +356,7 @@ public class TileEntityDust extends TileEntity implements IInventory {
 
    }
 
-   public String getInvName() {
+   public String getName() {
       return "dusttileentity";
    }
 
@@ -375,4 +375,50 @@ public class TileEntityDust extends TileEntity implements IInventory {
    public Packet getDescriptionPacket() {
       return PacketHandler.getTEDPacket(this);
    }
+
+    @Override
+    public int getSize() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ItemStack getItem(int i) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ItemStack splitStack(int i, int j) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ItemStack splitWithoutUpdate(int i) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setItem(int i, ItemStack itemstack) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+
+    @Override
+    public int getMaxStackSize() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean a(EntityHuman entityhuman) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void f() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void g() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

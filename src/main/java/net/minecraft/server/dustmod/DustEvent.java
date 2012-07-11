@@ -110,7 +110,7 @@ public abstract class DustEvent {
 
          while(var2.hasNext()) {
             Integer[] var3 = (Integer[])var2.next();
-            TileEntityRut var4 = (TileEntityRut)var1.worldObj.getTileEntity(var3[0].intValue(), var3[1].intValue(), var3[2].intValue());
+            TileEntityRut var4 = (TileEntityRut)var1.world.getTileEntity(var3[0].intValue(), var3[1].intValue(), var3[2].intValue());
             if(var4 != null) {
                var4.isBeingUsed = false;
             }
@@ -120,7 +120,7 @@ public abstract class DustEvent {
    }
 
    protected boolean takeXP(EntityDust var1, int var2) {
-      EntityHuman var3 = var1.worldObj.findNearbyPlayer(var1, 12.0D);
+      EntityHuman var3 = var1.world.findNearbyPlayer(var1, 12.0D);
       if(var3 != null && var3.abilities.canInstantlyBuild) {
          return true;
       } else if(var3 != null && var3.expLevel >= var2) {
@@ -132,7 +132,7 @@ public abstract class DustEvent {
    }
 
    protected boolean takeHunger(EntityDust var1, int var2) {
-      EntityHuman var3 = var1.worldObj.findNearbyPlayer(var1, 12.0D);
+      EntityHuman var3 = var1.world.findNearbyPlayer(var1, 12.0D);
       if(var3 != null && var3.abilities.canInstantlyBuild) {
          return true;
       } else if(var3 != null && var3.getFoodData().a() >= var2) {
@@ -190,7 +190,7 @@ public abstract class DustEvent {
 
    protected final List getSacrifice(EntityDust var1, double var2) {
       ArrayList var4 = new ArrayList();
-      List var5 = this.getEntities(var1.worldObj, var1.posX, var1.posY - 0.0D, var1.posZ, var2);
+      List var5 = this.getEntities(var1.world, var1.locX, var1.locY - 0.0D, var1.locZ, var2);
       Iterator var6 = var5.iterator();
 
       while(var6.hasNext()) {
@@ -351,7 +351,7 @@ public abstract class DustEvent {
    }
 
    protected final void findRuts(EntityDust var1) {
-      World var2 = var1.worldObj;
+      World var2 = var1.world;
       ArrayList var3 = new ArrayList();
       Iterator var4 = var1.dustPoints.iterator();
 
@@ -365,7 +365,7 @@ public abstract class DustEvent {
    }
 
    protected final void findRutsWithDistance(EntityDust var1, int var2) {
-      World var3 = var1.worldObj;
+      World var3 = var1.world;
       ArrayList var4 = new ArrayList();
       Iterator var5 = var1.dustPoints.iterator();
 
@@ -379,7 +379,7 @@ public abstract class DustEvent {
    }
 
    protected final void findRuts(EntityDust var1, int var2) {
-      World var3 = var1.worldObj;
+      World var3 = var1.world;
       ArrayList var4 = new ArrayList();
       Iterator var5 = var1.dustPoints.iterator();
 
@@ -393,7 +393,7 @@ public abstract class DustEvent {
    }
 
    protected final boolean findRutArea(EntityDust var1) {
-      World var2 = var1.worldObj;
+      World var2 = var1.world;
       ArrayList var3 = new ArrayList();
       ArrayList var4 = new ArrayList();
       ArrayList var5 = new ArrayList();
@@ -659,7 +659,7 @@ public abstract class DustEvent {
    }
 
    protected final boolean findRutArea(EntityDust var1, int var2) {
-      World var3 = var1.worldObj;
+      World var3 = var1.world;
       ArrayList var4 = new ArrayList();
       ArrayList var5 = new ArrayList();
       ArrayList var6 = new ArrayList();
@@ -917,7 +917,7 @@ public abstract class DustEvent {
    }
 
    protected final boolean findRutAreaFlat(EntityDust var1, int var2) {
-      World var3 = var1.worldObj;
+      World var3 = var1.world;
       ArrayList var4 = new ArrayList();
       ArrayList var5 = new ArrayList();
       new ArrayList();

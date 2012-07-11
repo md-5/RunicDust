@@ -44,7 +44,7 @@ public class DEFarm extends DustEvent {
          int var7 = var1.getX();
          int var8 = var1.getY();
          int var9 = var1.getZ();
-         World var10 = var1.worldObj;
+         World var10 = var1.world;
          var10.setTypeId(var7, var8 - 1, var9, Block.STATIONARY_WATER.id);
          Random var11 = new Random();
 
@@ -58,7 +58,7 @@ public class DEFarm extends DustEvent {
                   if(var14 >= -var4) {
                      int var15 = var10.getTypeId(var12 + var7, var14 + var8, var13 + var9);
                      int var16 = var10.getTypeId(var12 + var7, var14 + var8 - 1, var13 + var9);
-                     if(var16 != Block.DIRT.id && var16 != Block.GRASS.blockID && var16 != Block.SOIL.id && var16 != Block.SAND.id || var15 != 0 && !mod_DustMod.isDust(var15) && var15 != Block.LONG_GRASS.blockID) {
+                     if(var16 != Block.DIRT.id && var16 != Block.GRASS.id && var16 != Block.SOIL.id && var16 != Block.SAND.id || var15 != 0 && !mod_DustMod.isDust(var15) && var15 != Block.LONG_GRASS.id) {
                         --var14;
                         continue;
                      }

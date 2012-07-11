@@ -40,7 +40,7 @@ public class DEPit extends DustEvent {
          int var6 = var1.getX();
          int var7 = var1.getY() - 1;
          int var8 = var1.getZ();
-         World var9 = var1.worldObj;
+         World var9 = var1.world;
          if(var9.getTypeId(var6, var7, var8) != 0) {
             var1.fizzle();
          } else {
@@ -48,7 +48,7 @@ public class DEPit extends DustEvent {
                int var11 = var9.getTypeId(var6, var7 - var10, var8);
                Block var12 = Block.byId[var11];
                if(var12 != null && var11 != Block.BEDROCK.id) {
-                  var12.postBreak(var9, var6, var7 - var10, var8, var9.getData(var6, var7 - var10, var8));
+                  var12.a(var9, var6, var7 - var10, var8, var9.getData(var6, var7 - var10, var8));
                   var12.b(var9, var6, var7 - var10, var8, var9.getData(var6, var7 - var10, var8), 0);
                   var9.setTypeId(var6, var7 - var10, var8, 0);
                }
@@ -70,8 +70,8 @@ public class DEPit extends DustEvent {
          }
       }
 
-      if(var1.ticksExisted > 5) {
-         var1.kill();
+      if(var1.ticksLived > 5) {
+         var1.aI();
       }
 
    }

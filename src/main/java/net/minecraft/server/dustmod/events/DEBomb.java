@@ -57,7 +57,7 @@ public class DEBomb extends DustEvent {
       int var2 = var1.data & 7;
       int var3 = var1.data >> 3 & 7;
       var1.renderStar = true;
-      if(var2 != 1 && var1.ticksExisted < var2 * 30) {
+      if(var2 != 1 && var1.ticksLived < var2 * 30) {
          var1.setColorInner(140, 140, 140);
          var1.setColorOuter(140, 140, 140);
       } else {
@@ -73,6 +73,6 @@ public class DEBomb extends DustEvent {
    }
 
    public void trigger(EntityDust var1, int var2) {
-      var1.worldObj.explode(var1, var1.posX, var1.posY - 0.0D, var1.posZ, (float)(var2 * var2) + 2.0F);
+      var1.world.explode(var1, var1.locX, var1.locY - 0.0D, var1.locZ, (float)(var2 * var2) + 2.0F);
    }
 }

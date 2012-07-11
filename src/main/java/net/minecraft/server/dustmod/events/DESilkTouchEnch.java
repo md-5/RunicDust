@@ -23,7 +23,7 @@ public class DESilkTouchEnch extends DustEvent {
          ItemStack var6 = var5.itemStack;
          if(var6.id == Item.DIAMOND_PICKAXE.id || var6.id == Item.DIAMOND_SPADE.id) {
             var3 = var6.id;
-            var5.setDead();
+            var5.die();
             break;
          }
       }
@@ -44,14 +44,14 @@ public class DESilkTouchEnch extends DustEvent {
 
    public void onTick(EntityDust var1) {
       var1.starScale = (float)((double)var1.starScale + 0.001D);
-      if(var1.ticksExisted > 20) {
+      if(var1.ticksLived > 20) {
          EntityItem var2 = null;
          ItemStack var3 = new ItemStack(var1.rf, 1, 0);
          var3.addEnchantment(Enchantment.SILK_TOUCH, 1);
-         var2 = new EntityItem(var1.worldObj, var1.posX, var1.posY - 0.0D, var1.posZ, var3);
+         var2 = new EntityItem(var1.world, var1.locX, var1.locY - 0.0D, var1.locZ, var3);
          if(var2 != null) {
-            var2.setPosition(var1.posX, var1.posY, var1.posZ);
-            var1.worldObj.addEntity(var2);
+            var2.setPosition(var1.locX, var1.locY, var1.locZ);
+            var1.world.addEntity(var2);
          }
 
          var1.fade();

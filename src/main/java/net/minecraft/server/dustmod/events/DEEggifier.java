@@ -37,12 +37,12 @@ public class DEEggifier extends DustEvent {
    public void onTick(EntityDust var1) {
       super.onTick(var1);
       var1.starScale = (float)((double)var1.starScale + 0.001D);
-      if(var1.ticksExisted > 120) {
+      if(var1.ticksLived > 120) {
          EntityItem var2 = null;
-         var2 = new EntityItem(var1.worldObj, var1.posX, var1.posY, var1.posZ, new ItemStack(Item.MONSTER_EGG, 1, var1.data));
+         var2 = new EntityItem(var1.world, var1.locX, var1.locY, var1.locZ, new ItemStack(Item.MONSTER_EGG, 1, var1.data));
          if(var2 != null) {
-            var2.setPosition(var1.posX, var1.posY - 0.0D, var1.posZ);
-            var1.worldObj.addEntity(var2);
+            var2.setPosition(var1.locX, var1.locY - 0.0D, var1.locZ);
+            var1.world.addEntity(var2);
          }
 
          var1.fade();

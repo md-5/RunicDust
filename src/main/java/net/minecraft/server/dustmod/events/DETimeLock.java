@@ -53,15 +53,15 @@ public class DETimeLock extends PoweredEvent {
       super.onTick(var1);
       var1.setColorOuter(0, 255, 255);
       if(var1.ram == 0) {
-         if(var1.worldObj.getTime() > 2147483647L) {
-            var1.ram = (int)var1.worldObj.getTime() % 24000;
+         if(var1.world.getTime() > 2147483647L) {
+            var1.ram = (int)var1.world.getTime() % 24000;
          } else {
-            var1.ram = (int)var1.worldObj.getTime();
+            var1.ram = (int)var1.world.getTime();
          }
       }
 
-      var1.worldObj.setTime((long)var1.ram);
-      var1.ticksExisted = 100;
+      var1.world.setTime((long)var1.ram);
+      var1.ticksLived = 100;
       --var1.data;
       if(var1.data <= 0) {
          var1.fade();

@@ -22,7 +22,7 @@ public class DEWall extends DustEvent {
       var1.ignoreRune = true;
       ItemStack[] var2 = this.sacrifice(var1, new ItemStack[]{new ItemStack(Block.IRON_ORE, 5)});
       if(var2[0].count == 0 && this.takeXP(var1, 3)) {
-         World var3 = var1.worldObj;
+         World var3 = var1.world;
          Integer[][] var4 = new Integer[2][3];
          int var5 = 0;
          Iterator var6 = var1.dustPoints.iterator();
@@ -76,9 +76,9 @@ public class DEWall extends DustEvent {
    }
 
    public void onTick(EntityDust var1) {
-      if(var1.ticksExisted % 7 == 0) {
-         World var2 = var1.worldObj;
-         int var3 = var1.ticksExisted / 7;
+      if(var1.ticksLived % 7 == 0) {
+         World var2 = var1.world;
+         int var3 = var1.ticksLived / 7;
          int var4 = var1.getX();
          int var5 = var1.getY();
          int var6 = var1.getZ();
@@ -88,7 +88,7 @@ public class DEWall extends DustEvent {
 
          int var10;
          for(var10 = -var8; var10 <= var8; ++var10) {
-            List var11 = this.getEntities(var1.worldObj, (double)(var4 + (var7?var10:0)), (double)(var5 + var3), (double)(var6 + (var7?0:var10)), 1.0D);
+            List var11 = this.getEntities(var1.world, (double)(var4 + (var7?var10:0)), (double)(var5 + var3), (double)(var6 + (var7?0:var10)), 1.0D);
             Iterator var12 = var11.iterator();
 
             while(var12.hasNext()) {

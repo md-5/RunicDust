@@ -17,12 +17,12 @@ public class ItemChisel extends Item {
    public ItemChisel(int var1) {
       super(var1);
       this.tex = ModLoader.addOverride("/gui/items.png", mod_DustMod.path + "/hammerandchisel.png");
-      this.setMaxStackSize(1);
-      this.setMaxDamage(238);
-      this.setIconIndex(this.tex);
+      this.e(1);
+      this.setMaxDurability(238);
+      this.d(this.tex);
    }
 
-   public boolean onItemUse(ItemStack var1, EntityHuman var2, World var3, int var4, int var5, int var6, int var7) {
+   public boolean a(ItemStack var1, EntityHuman var2, World var3, int var4, int var5, int var6, int var7) {
       int var8 = var3.getTypeId(var4, var5, var6);
       int var9 = var3.getData(var4, var5, var6);
       Block var10 = Block.byId[var8];

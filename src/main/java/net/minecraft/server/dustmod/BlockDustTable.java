@@ -22,26 +22,26 @@ public class BlockDustTable extends BlockContainer {
 
    public BlockDustTable(int var1) {
       super(var1, 166, Material.WOOD);
-      this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
-      this.setLightOpacity(0);
+      this.a(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
+      this.f(0);
       standTex = ModLoader.addOverride("/terrain.png", mod_DustMod.path + "/standTop.png");
       standTexSide = ModLoader.addOverride("/terrain.png", mod_DustMod.path + "/standSide.png");
    }
 
-   public boolean renderAsNormalBlock() {
+   public boolean b() {
       return false;
    }
 
-   public void onBlockPlacedBy(World var1, int var2, int var3, int var4, EntityLiving var5) {
-      int var6 = MathHelper.floor((double)(var5.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+   public void a(World var1, int var2, int var3, int var4, EntityLiving var5) {
+      int var6 = MathHelper.floor((double)(var5.yaw * 4.0F / 360.0F) + 0.5D) & 3;
       var1.setData(var2, var3, var4, var6 - 1);
    }
 
-   public boolean isOpaqueCube() {
+   public boolean a() {
       return false;
    }
 
-   public int getBlockTextureFromSideAndMetadata(int var1, int var2) {
+   public int a(int var1, int var2) {
       return this.getBlockTextureFromSide(var1);
    }
 
@@ -49,7 +49,7 @@ public class BlockDustTable extends BlockContainer {
       return var1 == 1?standTex:(var1 == 0?Block.WOOD.textureId:standTexSide);
    }
 
-   public TileEntity getBlockEntity() {
+   public TileEntity a_() {
       return new TileEntityDustTable();
    }
 
@@ -73,7 +73,7 @@ public class BlockDustTable extends BlockContainer {
             return true;
          }
       } else if(var5.isSneaking()) {
-         this.onBlockClicked(var1, var2, var3, var4, var5);
+         this.b(var1, var2, var3, var4, var5);
          return true;
       } else {
          TileEntityDustTable var6 = (TileEntityDustTable)var1.getTileEntity(var2, var3, var4);
@@ -86,7 +86,7 @@ public class BlockDustTable extends BlockContainer {
       }
    }
 
-   public void onBlockClicked(World var1, int var2, int var3, int var4, EntityHuman var5) {
+   public void b(World var1, int var2, int var3, int var4, EntityHuman var5) {
       TileEntityDustTable var6 = (TileEntityDustTable)var1.getTileEntity(var2, var3, var4);
       ++var6.page;
       if(var6.page >= DustManager.names.size() - 0 + 1) {

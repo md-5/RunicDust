@@ -75,90 +75,89 @@ public class EntityDust extends Entity {
    public long entityDustID;
    public int data;
    public String summonerUN;
-   public static final double yOffset = 0.0D;
    public int lifetime = -1;
    public boolean fueledExternally = false;
 
 
    public EntityDust(World var1) {
       super(var1);
-      this.ignoreFrustumCheck = true;
+      this.cd = true;
       this.ri = this.gi = this.bi = 255;
       this.ro = 255;
       this.go = 236;
       this.bo = 128;
       this.width = 0.2F;
       this.height = 0.01F;
-      this.noClip = true;
-      this.renderDistanceWeight = 50.0D;
+      this.bQ = true;
+      this.be = 50.0D;
    }
 
-   protected void entityInit() {
-      this.dataWatcher.a(DW_ri, new Integer(this.ri));
-      this.dataWatcher.a(DW_gi, new Integer(this.gi));
-      this.dataWatcher.a(DW_bi, new Integer(this.bi));
-      this.dataWatcher.a(DW_ro, new Integer(this.ro));
-      this.dataWatcher.a(DW_go, new Integer(this.go));
-      this.dataWatcher.a(DW_bo, new Integer(this.bo));
-      this.dataWatcher.a(DW_rb, new Integer(this.rb));
-      this.dataWatcher.a(DW_gb, new Integer(this.gb));
-      this.dataWatcher.a(DW_bb, new Integer(this.bb));
-      this.dataWatcher.a(DW_rf, new Integer(this.rf));
-      this.dataWatcher.a(DW_gf, new Integer(this.gf));
-      this.dataWatcher.a(DW_bf, new Integer(this.bf));
-      this.dataWatcher.a(DW_starScale, Byte.valueOf((new Float(this.starScale)).byteValue()));
-      this.dataWatcher.a(DW_starScaleY, Byte.valueOf((new Float(this.starScaleY)).byteValue()));
-      this.dataWatcher.a(DW_renderBeam, Byte.valueOf((byte)(this.renderBeam?1:0)));
-      this.dataWatcher.a(DW_renderStar, Byte.valueOf((byte)(this.renderStar?1:0)));
+   protected void b() {
+      this.datawatcher.a(DW_ri, new Integer(this.ri));
+      this.datawatcher.a(DW_gi, new Integer(this.gi));
+      this.datawatcher.a(DW_bi, new Integer(this.bi));
+      this.datawatcher.a(DW_ro, new Integer(this.ro));
+      this.datawatcher.a(DW_go, new Integer(this.go));
+      this.datawatcher.a(DW_bo, new Integer(this.bo));
+      this.datawatcher.a(DW_rb, new Integer(this.rb));
+      this.datawatcher.a(DW_gb, new Integer(this.gb));
+      this.datawatcher.a(DW_bb, new Integer(this.bb));
+      this.datawatcher.a(DW_rf, new Integer(this.rf));
+      this.datawatcher.a(DW_gf, new Integer(this.gf));
+      this.datawatcher.a(DW_bf, new Integer(this.bf));
+      this.datawatcher.a(DW_starScale, Byte.valueOf((new Float(this.starScale)).byteValue()));
+      this.datawatcher.a(DW_starScaleY, Byte.valueOf((new Float(this.starScaleY)).byteValue()));
+      this.datawatcher.a(DW_renderBeam, Byte.valueOf((byte)(this.renderBeam?1:0)));
+      this.datawatcher.a(DW_renderStar, Byte.valueOf((byte)(this.renderStar?1:0)));
       if(this.eventName == null) {
          this.eventName = "";
       }
 
-      this.dataWatcher.a(DW_eventName, this.eventName);
+      this.datawatcher.a(DW_eventName, this.eventName);
    }
 
-   public void updateDataWatcher() {
-      this.dataWatcher.watch(DW_ri, new Integer(this.ri));
-      this.dataWatcher.watch(DW_gi, new Integer(this.gi));
-      this.dataWatcher.watch(DW_bi, new Integer(this.bi));
-      this.dataWatcher.watch(DW_ro, new Integer(this.ro));
-      this.dataWatcher.watch(DW_go, new Integer(this.go));
-      this.dataWatcher.watch(DW_bo, new Integer(this.bo));
-      this.dataWatcher.watch(DW_rb, new Integer(this.rb));
-      this.dataWatcher.watch(DW_gb, new Integer(this.gb));
-      this.dataWatcher.watch(DW_bb, new Integer(this.bb));
-      this.dataWatcher.watch(DW_rf, new Integer(this.rf));
-      this.dataWatcher.watch(DW_gf, new Integer(this.gf));
-      this.dataWatcher.watch(DW_bf, new Integer(this.bf));
-      this.dataWatcher.watch(DW_starScale, Byte.valueOf((new Float(this.starScale)).byteValue()));
-      this.dataWatcher.watch(DW_starScaleY, Byte.valueOf((new Float(this.starScaleY)).byteValue()));
-      this.dataWatcher.watch(DW_renderBeam, Byte.valueOf((byte)(this.renderBeam?1:0)));
-      this.dataWatcher.watch(DW_renderStar, Byte.valueOf((byte)(this.renderStar?1:0)));
+   public void updatedatawatcher() {
+      this.datawatcher.watch(DW_ri, new Integer(this.ri));
+      this.datawatcher.watch(DW_gi, new Integer(this.gi));
+      this.datawatcher.watch(DW_bi, new Integer(this.bi));
+      this.datawatcher.watch(DW_ro, new Integer(this.ro));
+      this.datawatcher.watch(DW_go, new Integer(this.go));
+      this.datawatcher.watch(DW_bo, new Integer(this.bo));
+      this.datawatcher.watch(DW_rb, new Integer(this.rb));
+      this.datawatcher.watch(DW_gb, new Integer(this.gb));
+      this.datawatcher.watch(DW_bb, new Integer(this.bb));
+      this.datawatcher.watch(DW_rf, new Integer(this.rf));
+      this.datawatcher.watch(DW_gf, new Integer(this.gf));
+      this.datawatcher.watch(DW_bf, new Integer(this.bf));
+      this.datawatcher.watch(DW_starScale, Byte.valueOf((new Float(this.starScale)).byteValue()));
+      this.datawatcher.watch(DW_starScaleY, Byte.valueOf((new Float(this.starScaleY)).byteValue()));
+      this.datawatcher.watch(DW_renderBeam, Byte.valueOf((byte)(this.renderBeam?1:0)));
+      this.datawatcher.watch(DW_renderStar, Byte.valueOf((byte)(this.renderStar?1:0)));
       if(this.eventName == null) {
          this.eventName = "";
       }
 
-      this.dataWatcher.watch(DW_eventName, this.eventName);
+      this.datawatcher.watch(DW_eventName, this.eventName);
    }
 
-   public void updateEntityFromDataWatcher() {
-      this.ri = this.dataWatcher.getInt(DW_ri);
-      this.gi = this.dataWatcher.getInt(DW_gi);
-      this.bi = this.dataWatcher.getInt(DW_bi);
-      this.ro = this.dataWatcher.getInt(DW_ro);
-      this.go = this.dataWatcher.getInt(DW_go);
-      this.bo = this.dataWatcher.getInt(DW_bo);
-      this.rb = this.dataWatcher.getInt(DW_rb);
-      this.gb = this.dataWatcher.getInt(DW_gb);
-      this.bb = this.dataWatcher.getInt(DW_bb);
-      this.rf = this.dataWatcher.getInt(DW_rf);
-      this.gf = this.dataWatcher.getInt(DW_gf);
-      this.bf = this.dataWatcher.getInt(DW_bf);
-      this.starScale = (new Float((float)this.dataWatcher.getByte(DW_starScale))).floatValue();
-      this.starScaleY = (new Float((float)this.dataWatcher.getByte(DW_starScaleY))).floatValue();
-      this.renderBeam = this.dataWatcher.getByte(DW_renderBeam) == 1;
-      this.renderStar = this.dataWatcher.getByte(DW_renderStar) == 1;
-      this.eventName = this.dataWatcher.getString(DW_eventName);
+   public void q_Fromdatawatcher() {
+      this.ri = this.datawatcher.getInt(DW_ri);
+      this.gi = this.datawatcher.getInt(DW_gi);
+      this.bi = this.datawatcher.getInt(DW_bi);
+      this.ro = this.datawatcher.getInt(DW_ro);
+      this.go = this.datawatcher.getInt(DW_go);
+      this.bo = this.datawatcher.getInt(DW_bo);
+      this.rb = this.datawatcher.getInt(DW_rb);
+      this.gb = this.datawatcher.getInt(DW_gb);
+      this.bb = this.datawatcher.getInt(DW_bb);
+      this.rf = this.datawatcher.getInt(DW_rf);
+      this.gf = this.datawatcher.getInt(DW_gf);
+      this.bf = this.datawatcher.getInt(DW_bf);
+      this.starScale = (new Float((float)this.datawatcher.getByte(DW_starScale))).floatValue();
+      this.starScaleY = (new Float((float)this.datawatcher.getByte(DW_starScaleY))).floatValue();
+      this.renderBeam = this.datawatcher.getByte(DW_renderBeam) == 1;
+      this.renderStar = this.datawatcher.getByte(DW_renderStar) == 1;
+      this.eventName = this.datawatcher.getString(DW_eventName);
       if(this.eventName == null) {
          this.eventName = "";
       }
@@ -174,28 +173,28 @@ public class EntityDust extends Entity {
       this.ri = var1;
       this.gi = var2;
       this.bi = var3;
-      this.updateDataWatcher();
+      this.updatedatawatcher();
    }
 
    public void setColorOuter(int var1, int var2, int var3) {
       this.ro = var1;
       this.go = var2;
       this.bo = var3;
-      this.updateDataWatcher();
+      this.updatedatawatcher();
    }
 
    public void setColorBeam(int var1, int var2, int var3) {
       this.rb = var1;
       this.gb = var2;
       this.bb = var3;
-      this.updateDataWatcher();
+      this.updatedatawatcher();
    }
 
    public void setColorFire(int var1, int var2, int var3) {
       this.rf = var1;
       this.gf = var2;
       this.bf = var3;
-      this.updateDataWatcher();
+      this.updatedatawatcher();
    }
 
    public void setEvent(DustEvent var1, String var2) {
@@ -203,15 +202,15 @@ public class EntityDust extends Entity {
       this.eventName = var2;
    }
 
-   protected void readEntityFromNBT(NBTTagCompound var1) {
-      this.ignoreFrustumCheck = true;
+   protected void a(NBTTagCompound var1) {
+      this.cd = true;
       this.ri = this.gi = this.bi = 255;
       this.ro = 255;
       this.go = 236;
       this.bo = 128;
       this.width = 0.2F;
       this.height = 0.01F;
-      this.noClip = true;
+      this.bQ = true;
       if(var1.hasKey("entityDustID")) {
          this.entityDustID = var1.getLong("entityDustID");
          mod_DustMod.registerEntityDust(this, this.entityDustID);
@@ -239,7 +238,7 @@ public class EntityDust extends Entity {
       }
 
       this.ignoreRune = var1.getBoolean("ignoreRune");
-      this.ticksExisted = var1.getInt("ticksexist");
+      this.ticksLived = var1.getInt("ticksexist");
       this.data = var1.getInt("data");
       if(var1.hasKey("requiresFuel")) {
          this.requiresFuel = var1.getBoolean("requiresFuel");
@@ -304,10 +303,10 @@ public class EntityDust extends Entity {
       this.starScaleY = var1.getFloat("starScaleY");
    }
 
-   protected void writeEntityToNBT(NBTTagCompound var1) {
+   protected void b(NBTTagCompound var1) {
       if(this.lifetime == -1) {
          var1.setString("eventname", this.eventName);
-         var1.setInt("ticksexist", this.ticksExisted);
+         var1.setInt("ticksexist", this.ticksLived);
          var1.setBoolean("rendBeam", this.renderBeam);
          var1.setBoolean("rendStar", this.renderStar);
          var1.setBoolean("renderFlamesDust", this.renderFlamesDust);
@@ -362,27 +361,27 @@ public class EntityDust extends Entity {
       }
    }
 
-   public void onEntityUpdate() {
+   public void aA() {
       boolean var1 = false;
-      if(this.worldObj.isStatic && this.event == null) {
+      if(this.world.isStatic && this.event == null) {
          this.event = DustManager.get(this.eventName);
          if(this.event != null) {
             var1 = this.event.overrideRemote;
          }
       }
 
-      if(this.worldObj.isStatic && this.event == null && !var1) {
+      if(this.world.isStatic && this.event == null && !var1) {
          super.aA();
-         if(this.ticksExisted % 10 == 0 && this.ticksExisted < 100 || this.ticksExisted % 60 == 0) {
-            this.updateEntityFromDataWatcher();
+         if(this.ticksLived % 10 == 0 && this.ticksLived < 100 || this.ticksLived % 60 == 0) {
+            this.q_Fromdatawatcher();
          }
 
       } else {
-         if(!this.worldObj.isStatic && (this.ticksExisted % 10 == 0 && this.ticksExisted < 100 || this.ticksExisted % 60 == 0)) {
-            this.updateDataWatcher();
+         if(!this.world.isStatic && (this.ticksLived % 10 == 0 && this.ticksLived < 100 || this.ticksLived % 60 == 0)) {
+            this.updatedatawatcher();
          }
 
-         if(!this.worldObj.isStatic) {
+         if(!this.world.isStatic) {
             this.givenFuelThisTick = false;
             Iterator var2;
             Integer[] var3;
@@ -391,7 +390,7 @@ public class EntityDust extends Entity {
 
                while(var2.hasNext()) {
                   var3 = (Integer[])var2.next();
-                  TileEntityDust var4 = (TileEntityDust)this.worldObj.getTileEntity(var3[0].intValue(), var3[1].intValue(), var3[2].intValue());
+                  TileEntityDust var4 = (TileEntityDust)this.world.getTileEntity(var3[0].intValue(), var3[1].intValue(), var3[2].intValue());
                   if(var4 != null) {
                      var4.setEntityDust(this);
                   }
@@ -403,16 +402,16 @@ public class EntityDust extends Entity {
             if(this.lifetime != -1) {
                super.aA();
                if(this.lifetime == 0) {
-                  this.kill();
+                  this.aI();
                }
 
                --this.lifetime;
                return;
             }
 
-            this.ignoreFrustumCheck = true;
+            this.cd = true;
             if(this.dustPoints == null) {
-               this.kill();
+               this.aI();
                return;
             }
 
@@ -422,10 +421,10 @@ public class EntityDust extends Entity {
 
                while(var2.hasNext()) {
                   var3 = (Integer[])var2.next();
-                  var21 = this.worldObj.getTypeId(var3[0].intValue(), var3[1].intValue(), var3[2].intValue());
+                  var21 = this.world.getTypeId(var3[0].intValue(), var3[1].intValue(), var3[2].intValue());
                   boolean var5 = false;
                   if(mod_DustMod.isDust(var21)) {
-                     this.worldObj.setData(var3[0].intValue(), var3[1].intValue(), var3[2].intValue(), 0);
+                     this.world.setData(var3[0].intValue(), var3[1].intValue(), var3[2].intValue(), 0);
                   }
                }
 
@@ -438,23 +437,23 @@ public class EntityDust extends Entity {
 
                while(var2.hasNext()) {
                   var3 = (Integer[])var2.next();
-                  var21 = this.worldObj.getTypeId(var3[0].intValue(), var3[1].intValue(), var3[2].intValue());
+                  var21 = this.world.getTypeId(var3[0].intValue(), var3[1].intValue(), var3[2].intValue());
                   if(!mod_DustMod.isDust(var21)) {
-                     this.kill();
+                     this.aI();
                      return;
                   }
                }
             }
 
             if(this.event == null || this.eventName == null || this.eventName.isEmpty()) {
-               this.kill();
+               this.aI();
                return;
             }
 
             if(this.follow) {
                Object var18 = this.toFollow;
                if(var18 == null) {
-                  EntityHuman var19 = this.worldObj.a(this.summonerUN);
+                  EntityHuman var19 = this.world.a(this.summonerUN);
                   if(var19 == null) {
                      return;
                   }
@@ -464,7 +463,7 @@ public class EntityDust extends Entity {
 
                byte var20 = 60;
                double var6 = 0.27D;
-               double var8 = (double)(this.ticksExisted % var20);
+               double var8 = (double)(this.ticksLived % var20);
                double var10 = Math.sin(var8 / (double)var20 * 3.141592653589793D * 2.0D);
                double var12 = Math.cos(var8 / (double)var20 * 3.141592653589793D * 2.0D);
                double var14 = var12 * var6;
@@ -473,9 +472,9 @@ public class EntityDust extends Entity {
             }
 
             if(this.fade) {
-               this.ticksExisted += 2;
-               if(this.ticksExisted % 200 > 190) {
-                  this.kill();
+               this.ticksLived += 2;
+               if(this.ticksLived % 200 > 190) {
+                  this.aI();
                }
 
                super.aA();
@@ -510,19 +509,19 @@ public class EntityDust extends Entity {
 
             int var19;
             for(var19 = 0; var19 < var8; ++var19) {
-               this.worldObj.a(var9, (double)((float)this.posX + var17 + var10.nextFloat() * var11 - 0.5F), (double)((float)this.posY + var12), (double)((float)this.posZ + var18 + var10.nextFloat() * var11 - 0.5F), var2, var4, var6);
+               this.world.a(var9, (double)((float)this.locX + var17 + var10.nextFloat() * var11 - 0.5F), (double)((float)this.locY + var12), (double)((float)this.locZ + var18 + var10.nextFloat() * var11 - 0.5F), var2, var4, var6);
             }
 
             for(var19 = 0; var19 < var8; ++var19) {
-               this.worldObj.a(var9, (double)((float)this.posX - var17 + var10.nextFloat() * var11 - 0.5F), (double)((float)this.posY + var12), (double)((float)this.posZ + var18 + var10.nextFloat() * var11 - 0.5F), var2, var4, var6);
+               this.world.a(var9, (double)((float)this.locX - var17 + var10.nextFloat() * var11 - 0.5F), (double)((float)this.locY + var12), (double)((float)this.locZ + var18 + var10.nextFloat() * var11 - 0.5F), var2, var4, var6);
             }
 
             for(var19 = 0; var19 < var8; ++var19) {
-               this.worldObj.a(var9, (double)((float)this.posX + var17 + var10.nextFloat() * var11 - 0.5F), (double)((float)this.posY + var12), (double)((float)this.posZ - var18 + var10.nextFloat() * var11 - 0.5F), var2, var4, var6);
+               this.world.a(var9, (double)((float)this.locX + var17 + var10.nextFloat() * var11 - 0.5F), (double)((float)this.locY + var12), (double)((float)this.locZ - var18 + var10.nextFloat() * var11 - 0.5F), var2, var4, var6);
             }
 
             for(var19 = 0; var19 < var8; ++var19) {
-               this.worldObj.a(var9, (double)((float)this.posX - var17 + var10.nextFloat() * var11 - 0.5F), (double)((float)this.posY + var12), (double)((float)this.posZ - var18 + var10.nextFloat() * var11 - 0.5F), var2, var4, var6);
+               this.world.a(var9, (double)((float)this.locX - var17 + var10.nextFloat() * var11 - 0.5F), (double)((float)this.locY + var12), (double)((float)this.locZ - var18 + var10.nextFloat() * var11 - 0.5F), var2, var4, var6);
             }
          }
       }
@@ -547,10 +546,10 @@ public class EntityDust extends Entity {
             float var21 = (float)Math.cos(var18);
             float var22 = var10 * var21 * var16;
             float var23 = var10 * var20 * var16;
-            this.worldObj.a(var11, (double)((float)this.posX + var22 + var8.nextFloat() * var9 - 0.5F), (double)((float)this.posY + var12 + var17 + var8.nextFloat() * var9), (double)((float)this.posZ + var23 + var8.nextFloat() * var9 - 0.5F), var2, var4, var6);
-            this.worldObj.a(var11, (double)((float)this.posX - var22 + var8.nextFloat() * var9 - 0.5F), (double)((float)this.posY + var12 + var17 + var8.nextFloat() * var9), (double)((float)this.posZ + var23 + var8.nextFloat() * var9 - 0.5F), var2, var4, var6);
-            this.worldObj.a(var11, (double)((float)this.posX + var22 + var8.nextFloat() * var9 - 0.5F), (double)((float)this.posY + var12 + var17 + var8.nextFloat() * var9), (double)((float)this.posZ - var23 + var8.nextFloat() * var9 - 0.5F), var2, var4, var6);
-            this.worldObj.a(var11, (double)((float)this.posX - var22 + var8.nextFloat() * var9 - 0.5F), (double)((float)this.posY + var12 + var17 + var8.nextFloat() * var9), (double)((float)this.posZ - var23 + var8.nextFloat() * var9 - 0.5F), var2, var4, var6);
+            this.world.a(var11, (double)((float)this.locX + var22 + var8.nextFloat() * var9 - 0.5F), (double)((float)this.locY + var12 + var17 + var8.nextFloat() * var9), (double)((float)this.locZ + var23 + var8.nextFloat() * var9 - 0.5F), var2, var4, var6);
+            this.world.a(var11, (double)((float)this.locX - var22 + var8.nextFloat() * var9 - 0.5F), (double)((float)this.locY + var12 + var17 + var8.nextFloat() * var9), (double)((float)this.locZ + var23 + var8.nextFloat() * var9 - 0.5F), var2, var4, var6);
+            this.world.a(var11, (double)((float)this.locX + var22 + var8.nextFloat() * var9 - 0.5F), (double)((float)this.locY + var12 + var17 + var8.nextFloat() * var9), (double)((float)this.locZ - var23 + var8.nextFloat() * var9 - 0.5F), var2, var4, var6);
+            this.world.a(var11, (double)((float)this.locX - var22 + var8.nextFloat() * var9 - 0.5F), (double)((float)this.locY + var12 + var17 + var8.nextFloat() * var9), (double)((float)this.locZ - var23 + var8.nextFloat() * var9 - 0.5F), var2, var4, var6);
          }
       }
 
@@ -560,7 +559,7 @@ public class EntityDust extends Entity {
       this.event.onRightClick(this, var1, var2);
    }
 
-   public void kill() {
+   public void aI() {
       if(this.event != null) {
          this.event.onUnload(this);
       }
@@ -572,10 +571,10 @@ public class EntityDust extends Entity {
 
          while(var1.hasNext()) {
             Integer[] var2 = (Integer[])var1.next();
-            int var3 = this.worldObj.getTypeId(var2[0].intValue(), var2[1].intValue(), var2[2].intValue());
+            int var3 = this.world.getTypeId(var2[0].intValue(), var2[1].intValue(), var2[2].intValue());
             boolean var4 = false;
             if(mod_DustMod.isDust(var3)) {
-               this.worldObj.setData(var2[0].intValue(), var2[1].intValue(), var2[2].intValue(), 2);
+               this.world.setData(var2[0].intValue(), var2[1].intValue(), var2[2].intValue(), 2);
             }
          }
 
@@ -588,26 +587,26 @@ public class EntityDust extends Entity {
    }
 
    public void fizzle() {
-      int var1 = (int)Math.floor(this.posX);
-      int var2 = (int)Math.floor(this.posZ);
+      int var1 = (int)Math.floor(this.locX);
+      int var2 = (int)Math.floor(this.locZ);
 
       for(int var3 = 0; (double)var3 < Math.random() * 5.0D + 3.0D; ++var3) {
-         this.worldObj.a("largesmoke", (double)var1 + Math.random() * 2.0D, this.posY - 1.0D - 0.0D + Math.random() / 2.0D, (double)var2 + Math.random() * 2.0D, 0.0D, 0.0D, 0.0D);
+         this.world.a("largesmoke", (double)var1 + Math.random() * 2.0D, this.locY - 1.0D - 0.0D + Math.random() / 2.0D, (double)var2 + Math.random() * 2.0D, 0.0D, 0.0D, 0.0D);
       }
 
-      this.kill();
+      this.aI();
    }
 
    public int getX() {
-      return (int)Math.floor(this.posX);
+      return (int)Math.floor(this.locX);
    }
 
    public int getY() {
-      return (int)Math.floor(this.posY - 0.0D);
+      return (int)Math.floor(this.locY - 0.0D);
    }
 
    public int getZ() {
-      return (int)Math.floor(this.posZ);
+      return (int)Math.floor(this.locZ);
    }
 
    public void setFuel(int var1) {

@@ -42,20 +42,20 @@ public class EntityBlock extends EntityFallingBlock {
       super(var1, var2, var4, var6, var8, 0);
    }
 
-   protected void entityInit() {
+   protected void b() {
       super.b();
-      this.dataWatcher.a(10, new Integer(this.blockID));
-      this.dataWatcher.a(11, new Integer(this.meta));
+      this.datawatcher.a(10, new Integer(this.id));
+      this.datawatcher.a(11, new Integer(this.meta));
    }
 
-   public void updateDataWatcher() {
-      this.dataWatcher.watch(10, new Integer(this.blockID));
-      this.dataWatcher.watch(11, new Integer(this.meta));
+   public void updatedatawatcher() {
+      this.datawatcher.watch(10, new Integer(this.id));
+      this.datawatcher.watch(11, new Integer(this.meta));
    }
 
-   public void updateEntityFromDataWatcher() {
-      this.blockID = this.dataWatcher.getInt(10);
-      this.meta = this.dataWatcher.getInt(11);
+   public void q_Fromdatawatcher() {
+      this.id = this.datawatcher.getInt(10);
+      this.meta = this.datawatcher.getInt(11);
    }
 
    public boolean canBePushed() {
@@ -63,31 +63,31 @@ public class EntityBlock extends EntityFallingBlock {
    }
 
    public boolean canBeCollidedWith() {
-      return !this.isDead;
+      return !this.dead;
    }
 
-   public void onUpdate() {
+   public void a() {
       if(this.isBurning()) {
          this.extinguish();
       }
 
-      if(this.worldObj.isStatic) {
-         super.onEntityUpdate();
-         if(this.ticksExisted % 10 == 0 && this.ticksExisted < 100 || this.ticksExisted % 60 == 0) {
-            this.updateEntityFromDataWatcher();
+      if(this.world.isStatic) {
+         super.aA();
+         if(this.ticksLived % 10 == 0 && this.ticksLived < 100 || this.ticksLived % 60 == 0) {
+            this.q_Fromdatawatcher();
          }
 
       } else {
-         if(this.ticksExisted % 10 == 0 && this.ticksExisted < 100 || this.ticksExisted % 60 == 0) {
-            this.updateDataWatcher();
+         if(this.ticksLived % 10 == 0 && this.ticksLived < 100 || this.ticksLived % 60 == 0) {
+            this.updatedatawatcher();
          }
 
-         this.motionX = this.motionY = this.motionZ = 0.0D;
+         this.motX = this.motY = this.motZ = 0.0D;
          DustEvent var1;
          if(this.justBorn && this.hasParentDust && this.parentDust == null) {
             this.parentDust = mod_DustMod.getDustAtID(this.parentDustID);
             if(this.parentDust == null) {
-               this.setDead();
+               this.die();
                return;
             }
 
@@ -99,29 +99,29 @@ public class EntityBlock extends EntityFallingBlock {
             this.justBorn = false;
          }
 
-         if(this.lingering && this.worldObj.getTypeId(this.lx, this.ly, this.lz) != this.blockID) {
-            this.setDead();
+         if(this.lingering && this.world.getTypeId(this.lx, this.ly, this.lz) != this.id) {
+            this.die();
          } else {
             if(this.going) {
-               if(this.lingering && this.getDistance((double)this.lx, (double)this.ly, (double)this.lz) > 0.5D) {
-                  this.worldObj.setTypeId(this.lx, this.ly, this.lz, 0);
+               if(this.lingering && this.f((double)this.lx, (double)this.ly, (double)this.lz) > 0.5D) {
+                  this.world.setTypeId(this.lx, this.ly, this.lz, 0);
                   this.lingering = false;
                }
 
                double var2 = this.goTo(this.gv, this.gx, this.gy, this.gz);
                if(this.lingerWhenArrived || this.lingering) {
-                  this.noClip = true;
+                  this.bQ = true;
                }
 
-               this.moveEntity(this.motionX, this.motionY, this.motionZ);
+               this.a(this.motX, this.motY, this.motZ);
                if(this.lingerWhenArrived || this.lingering) {
-                  this.noClip = false;
+                  this.bQ = false;
                }
 
                double var4 = 0.02D;
-               if(this.placeWhenArrived && (var2 < 0.4D || Math.abs(this.motionX) < var4 && Math.abs(this.motionY) < var4 && Math.abs(this.motionY) < var4)) {
+               if(this.placeWhenArrived && (var2 < 0.4D || Math.abs(this.motX) < var4 && Math.abs(this.motY) < var4 && Math.abs(this.motY) < var4)) {
                   if(this.lingering) {
-                     this.worldObj.setTypeId(this.lx, this.ly, this.lz, 0);
+                     this.world.setTypeId(this.lx, this.ly, this.lz, 0);
                      this.lingering = false;
                   }
 
@@ -135,10 +135,10 @@ public class EntityBlock extends EntityFallingBlock {
                      var1.registerFollower(this.parentDust, this);
                   }
                } else {
-                  this.setDead();
+                  this.die();
                }
-            } else if(this.parentDust != null && this.parentDust.isDead || this.blockID == 0) {
-               this.setDead();
+            } else if(this.parentDust != null && this.parentDust.dead || this.id == 0) {
+               this.die();
                return;
             }
 
@@ -147,7 +147,7 @@ public class EntityBlock extends EntityFallingBlock {
    }
 
    protected void writeEntityToNBT(NBTTagCompound var1) {
-      var1.setInt("tile", this.blockID);
+      var1.setInt("tile", this.id);
       var1.setInt("meta", this.meta);
       var1.setBoolean("save", this.save);
       var1.setBoolean("hasparentdust", this.hasParentDust);
@@ -167,9 +167,9 @@ public class EntityBlock extends EntityFallingBlock {
 
    protected void readEntityFromNBT(NBTTagCompound var1) {
       if(!var1.getBoolean("save")) {
-         this.setDead();
+         this.die();
       } else {
-         this.blockID = var1.getInt("tile");
+         this.id = var1.getInt("tile");
          this.hasParentDust = var1.getBoolean("hasparentdust");
          this.parentDustID = var1.getLong("parentDustID");
          this.going = var1.getBoolean("going");
@@ -191,7 +191,7 @@ public class EntityBlock extends EntityFallingBlock {
    }
 
    public World getWorld() {
-      return this.worldObj;
+      return this.world;
    }
 
    public void setSave(boolean var1) {
@@ -215,19 +215,19 @@ public class EntityBlock extends EntityFallingBlock {
    }
 
    public void place() {
-      this.lx = MathHelper.floor(this.posX);
-      this.ly = MathHelper.floor(this.posY - 0.5D);
-      this.lz = MathHelper.floor(this.posZ);
+      this.lx = MathHelper.floor(this.locX);
+      this.ly = MathHelper.floor(this.locY - 0.5D);
+      this.lz = MathHelper.floor(this.locZ);
       this.going = false;
       this.placeWhenArrived = false;
       this.gv = 0.0D;
-      if(this.worldObj.getTypeId(this.lx, this.ly, this.lz) == 0) {
-         this.worldObj.setTypeIdAndData(this.lx, this.ly, this.lz, this.blockID, this.meta);
+      if(this.world.getTypeId(this.lx, this.ly, this.lz) == 0) {
+         this.world.setTypeIdAndData(this.lx, this.ly, this.lz, this.id, this.meta);
          if(this.lingerWhenArrived) {
             this.lingering = true;
             this.lingerWhenArrived = false;
          } else {
-            this.setDead();
+            this.die();
          }
       }
 
@@ -242,15 +242,15 @@ public class EntityBlock extends EntityFallingBlock {
       this.gx = var3;
       this.gy = var5;
       this.gz = var7;
-      double var9 = var3 - this.posX;
-      double var11 = var5 - this.posY;
-      double var13 = var7 - this.posZ;
+      double var9 = var3 - this.locX;
+      double var11 = var5 - this.locY;
+      double var13 = var7 - this.locZ;
       this.going = true;
       this.gv = var1;
       Vec3D var15 = Vec3D.create(var9, var11, var13);
-      double var16 = this.getDistance(var3, var5, var7);
+      double var16 = this.f(var3, var5, var7);
       if(var16 < 0.4D) {
-         this.motionX = this.motionY = this.motionZ = 0.0D;
+         this.motX = this.motY = this.motZ = 0.0D;
          return var16;
       } else {
          if(var16 < this.gv) {
@@ -261,9 +261,9 @@ public class EntityBlock extends EntityFallingBlock {
          double var18 = var15.a * var1;
          double var20 = var15.b * var1;
          double var22 = var15.c * var1;
-         this.motionX = var18;
-         this.motionY = var20;
-         this.motionZ = var22;
+         this.motX = var18;
+         this.motY = var20;
+         this.motZ = var22;
          return var16;
       }
    }

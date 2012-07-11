@@ -34,7 +34,7 @@ public class DECompression extends DustEvent {
 
    public void onTick(EntityDust var1) {
       var1.starScale = (float)((double)var1.starScale + 0.001D);
-      if(var1.ticksExisted > 20) {
+      if(var1.ticksLived > 20) {
          int var2 = var1.data;
          int var3 = var2 / 64;
          int var4 = var2 % 64;
@@ -43,20 +43,20 @@ public class DECompression extends DustEvent {
          for(int var5 = 0; var5 < var3; ++var5) {
             EntityItem var6 = null;
             ItemStack var7 = new ItemStack(Item.DIAMOND.id, 64, 0);
-            var6 = new EntityItem(var1.worldObj, var1.posX, var1.posY - 0.0D, var1.posZ, var7);
+            var6 = new EntityItem(var1.world, var1.locX, var1.locY - 0.0D, var1.locZ, var7);
             if(var6 != null) {
-               var6.setPosition(var1.posX, var1.posY - 0.0D, var1.posZ);
-               var1.worldObj.addEntity(var6);
+               var6.setPosition(var1.locX, var1.locY - 0.0D, var1.locZ);
+               var1.world.addEntity(var6);
             }
          }
 
          if(var4 > 0) {
             EntityItem var8 = null;
             ItemStack var9 = new ItemStack(Item.DIAMOND.id, var4, 0);
-            var8 = new EntityItem(var1.worldObj, var1.posX, var1.posY - 0.0D, var1.posZ, var9);
+            var8 = new EntityItem(var1.world, var1.locX, var1.locY - 0.0D, var1.locZ, var9);
             if(var8 != null) {
-               var8.setPosition(var1.posX, var1.posY - 0.0D, var1.posZ);
-               var1.worldObj.addEntity(var8);
+               var8.setPosition(var1.locX, var1.locY - 0.0D, var1.locZ);
+               var1.world.addEntity(var8);
             }
          }
 

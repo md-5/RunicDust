@@ -24,24 +24,24 @@ public class TileEntityDustTable extends TileEntity {
    public int dir = -1;
 
 
-   public void writeToNBT(NBTTagCompound var1) {
+   public void b(NBTTagCompound var1) {
       super.b(var1);
       var1.setInt("page", this.page);
    }
 
-   public void readFromNBT(NBTTagCompound var1) {
+   public void a(NBTTagCompound var1) {
       super.a(var1);
       this.page = var1.getInt("page");
       this.pageFlipping = this.prevPageFlipping = this.floatd = (float)this.page / 2.0F;
    }
 
-   public void updateEntity() {
-      this.dir = this.worldObj.getData(this.xCoord, this.yCoord, this.zCoord);
+   public void q_() {
+      this.dir = this.world.getData(this.x, this.y, this.z);
       this.floatd = (float)this.page / 2.0F;
       super.q_();
       this.prevFloating = this.floating;
       this.prevRotation = this.rotation;
-      EntityHuman var1 = this.worldObj.findNearbyPlayer((double)((float)this.xCoord + 0.5F), (double)((float)this.yCoord + 0.5F), (double)((float)this.zCoord + 0.5F), 3.0D);
+      EntityHuman var1 = this.world.findNearbyPlayer((double)((float)this.x + 0.5F), (double)((float)this.y + 0.5F), (double)((float)this.z + 0.5F), 3.0D);
       if(var1 != null) {
          this.floating += 0.1F;
       } else {

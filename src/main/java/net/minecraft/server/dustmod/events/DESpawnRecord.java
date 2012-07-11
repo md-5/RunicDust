@@ -22,10 +22,10 @@ public class DESpawnRecord extends DustEvent {
 
    public void onTick(EntityDust var1) {
       var1.starScale = (float)((double)var1.starScale + 1.0E-4D);
-      if(var1.ticksExisted > 120) {
+      if(var1.ticksLived > 120) {
          Random var2 = new Random();
-         EntityItem var3 = new EntityItem(var1.worldObj, var1.posX, var1.posY - 0.0D - 1.0D, var1.posZ, new ItemStack(2000 + var2.nextInt(11) + 256, 1, 0));
-         var1.worldObj.addEntity(var3);
+         EntityItem var3 = new EntityItem(var1.world, var1.locX, var1.locY - 0.0D - 1.0D, var1.locZ, new ItemStack(2000 + var2.nextInt(11) + 256, 1, 0));
+         var1.world.addEntity(var3);
          var1.fade();
       }
 

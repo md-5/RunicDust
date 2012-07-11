@@ -21,13 +21,13 @@ public abstract class DETrap extends DustEvent {
 
    public void onTick(EntityDust var1) {
       var1.renderStar = true;
-      if(var1.ticksExisted < 80) {
+      if(var1.ticksLived < 80) {
          var1.setColorInner(140, 140, 140);
          var1.setColorOuter(140, 140, 140);
       } else {
          var1.setColorInner(0, 0, 255);
          var1.setColorOuter(0, 0, 255);
-         List var2 = this.getEntitiesExcluding(var1.worldObj, var1, var1.posX, var1.posY, var1.posZ, 2.0D);
+         List var2 = this.getEntitiesExcluding(var1.world, var1, var1.locX, var1.locY, var1.locZ, 2.0D);
          if(var2.size() > 0) {
             this.trigger(var1, var1.dustID);
             var1.fade();

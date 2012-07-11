@@ -414,7 +414,7 @@ public class DustManager {
       var5.setName("Rune of the Hunter");
       var5.setManualRotationDerp(new int[]{-1, -1, -1, -1, -1, -1, -1, -1});
       var5.setNotes("Sacrifice:\n\n-3xBlazePowder + 1xEnderEye + 12XP\n\nNotes:\n\n-Will last a day unless fueled.\n-Will cause lag: Right clicking will pause the rune (and its fuel consumption.)\n\nCurrent bug: Does not detect entities who do not utilize the new AI system.");
-      var5.setDesc("Description:\n\nAllows you to see the location and health of any mob nearby. WARNING: Possiblitity for lag on lower-quality machines. Right-click the rune to disable. ");
+      var5.setDesc("Description:\n\nAllows you to see the location and health of any mob nearby. WARNING: locsiblitity for lag on lower-quality machines. Right-click the rune to disable. ");
       shapes.add(var5);
       var5 = new DustShape(6, 6, 1, "loyaltysprite6", false, 3, 3, 1, 1, 21);
       add(var5.name, (new DELoyaltySprite()).setAllowed(false).setPermaAllowed(false));

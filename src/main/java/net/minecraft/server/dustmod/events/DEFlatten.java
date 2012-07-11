@@ -49,7 +49,7 @@ public class DEFlatten extends DustEvent {
    }
 
    public void onTick(EntityDust var1) {
-      if(var1.ticksExisted % this.tickRate == 0) {
+      if(var1.ticksLived % this.tickRate == 0) {
          byte var2 = 0;
          byte var3 = 4;
          switch(var1.data) {
@@ -69,7 +69,7 @@ public class DEFlatten extends DustEvent {
             var3 = 9;
          }
 
-         int var4 = var1.ticksExisted / this.tickRate;
+         int var4 = var1.ticksLived / this.tickRate;
          if(var4 > var2) {
             var4 = var2;
          }
@@ -77,7 +77,7 @@ public class DEFlatten extends DustEvent {
          int var5 = var1.getX();
          int var6 = var1.getY();
          int var7 = var1.getZ();
-         World var8 = var1.worldObj;
+         World var8 = var1.world;
 
          for(int var9 = -var4; var9 <= var4; ++var9) {
             for(int var10 = -var4; var10 <= var4; ++var10) {
@@ -110,7 +110,7 @@ public class DEFlatten extends DustEvent {
             }
          }
 
-         if(var1.ticksExisted / this.tickRate > var2 + var3) {
+         if(var1.ticksLived / this.tickRate > var2 + var3) {
             var1.fade();
          }
       }

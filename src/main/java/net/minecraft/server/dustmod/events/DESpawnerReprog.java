@@ -30,7 +30,7 @@ public class DESpawnerReprog extends DustEvent {
                var2 = var7.getData();
                --var7.count;
                if(var7.count <= 0) {
-                  var6.setDead();
+                  var6.die();
                }
             }
          }
@@ -46,8 +46,8 @@ public class DESpawnerReprog extends DustEvent {
    }
 
    public void onTick(EntityDust var1) {
-      if(var1.ticksExisted > 120) {
-         String var2 = EntityTypes.b(EntityTypes.a(var1.data, var1.worldObj));
+      if(var1.ticksLived > 120) {
+         String var2 = EntityTypes.b(EntityTypes.a(var1.data, var1.world));
          int[] var3 = new int[3];
 
          Integer[] var5;
@@ -60,10 +60,10 @@ public class DESpawnerReprog extends DustEvent {
          var3[0] /= 8;
          var3[1] /= 8;
          var3[2] /= 8;
-         if(var1.worldObj.getTypeId(var3[0], var3[1], var3[2]) == Block.MOB_SPAWNER.id) {
-            TileEntityMobSpawner var9 = (TileEntityMobSpawner)var1.worldObj.getTileEntity(var3[0], var3[1], var3[2]);
+         if(var1.world.getTypeId(var3[0], var3[1], var3[2]) == Block.MOB_SPAWNER.id) {
+            TileEntityMobSpawner var9 = (TileEntityMobSpawner)var1.world.getTileEntity(var3[0], var3[1], var3[2]);
             var9.a(var2);
-            var9.validate();
+            var9.m();
          }
 
          var1.fade();
@@ -80,7 +80,7 @@ public class DESpawnerReprog extends DustEvent {
          var6[0] /= 8;
          var6[1] /= 8;
          var6[2] /= 8;
-         TileEntityMobSpawner var8 = (TileEntityMobSpawner)var1.worldObj.getTileEntity(var6[0], var6[1], var6[2]);
+         TileEntityMobSpawner var8 = (TileEntityMobSpawner)var1.world.getTileEntity(var6[0], var6[1], var6[2]);
          var8.b = 0.0D;
       }
 

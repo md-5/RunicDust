@@ -14,7 +14,7 @@ import net.minecraft.server.dustmod.TileEntityDust;
 public class DELillyBridge extends DustEvent {
 
    public void onInit(EntityDust var1) {
-      World var2 = var1.worldObj;
+      World var2 = var1.world;
       ItemStack[] var3 = this.sacrifice(var1, new ItemStack[]{new ItemStack(Block.LEAVES, 4, -1)});
       if(var3[0].count != 0) {
          var1.fizzle();
@@ -72,17 +72,17 @@ public class DELillyBridge extends DustEvent {
                   }
 
                   if(var16 == 0 && var9 == 0) {
-                     var1.posX = (double)(var4[0].intValue() + var13) + 0.5D;
-                     var1.posY = (double)var4[1].intValue() + 1.5D + 0.0D;
-                     var1.posZ = (double)(var4[2].intValue() + var14) + 0.5D;
+                     var1.locX = (double)(var4[0].intValue() + var13) + 0.5D;
+                     var1.locY = (double)var4[1].intValue() + 1.5D + 0.0D;
+                     var1.locZ = (double)(var4[2].intValue() + var14) + 0.5D;
                      if(var13 == -1) {
-                        var1.rotationYaw = 270.0F;
+                        var1.yaw = 270.0F;
                      } else if(var13 == 1) {
-                        var1.rotationYaw = 90.0F;
+                        var1.yaw = 90.0F;
                      } else if(var14 == -1) {
-                        var1.rotationYaw = 0.0F;
+                        var1.yaw = 0.0F;
                      } else if(var14 == 1) {
-                        var1.rotationYaw = 180.0F;
+                        var1.yaw = 180.0F;
                      }
                   }
                }
@@ -96,19 +96,19 @@ public class DELillyBridge extends DustEvent {
 
    public void onTick(EntityDust var1) {
       byte var2 = 20;
-      if(var1.ticksExisted % var2 == 0) {
-         World var3 = var1.worldObj;
-         int var4 = (var1.ticksExisted / var2 + 1) * 2;
+      if(var1.ticksLived % var2 == 0) {
+         World var3 = var1.world;
+         int var4 = (var1.ticksLived / var2 + 1) * 2;
          int var5 = var1.getY() - 1;
          int var6 = var1.getX();
          int var7 = var1.getZ();
-         if(var1.rotationYaw == 90.0F) {
+         if(var1.yaw == 90.0F) {
             var6 -= var4;
-         } else if(var1.rotationYaw == 270.0F) {
+         } else if(var1.yaw == 270.0F) {
             var6 += var4;
-         } else if(var1.rotationYaw == 180.0F) {
+         } else if(var1.yaw == 180.0F) {
             var7 -= var4;
-         } else if(var1.rotationYaw == 0.0F) {
+         } else if(var1.yaw == 0.0F) {
             var7 += var4;
          }
 
@@ -119,7 +119,7 @@ public class DELillyBridge extends DustEvent {
          }
       }
 
-      if(var1.ticksExisted > 16 * var2) {
+      if(var1.ticksLived > 16 * var2) {
          var1.fade();
       }
 

@@ -20,7 +20,7 @@ public class DETeleportation extends PoweredEvent {
 
    public void onInit(EntityDust var1) {
       super.onInit(var1);
-      World var2 = var1.worldObj;
+      World var2 = var1.world;
       ItemStack[] var3 = this.sacrifice(var1, new ItemStack[]{new ItemStack(Item.ENDER_PEARL, 1)});
       if(var3[0].count == 0 && this.takeXP(var1, 20)) {
          Integer[] var4 = null;
@@ -76,17 +76,17 @@ public class DETeleportation extends PoweredEvent {
                   }
 
                   if(var16 == 0 && var9 == 0) {
-                     var1.posX = (double)(var4[0].intValue() + var13) + 0.5D;
-                     var1.posY = (double)var4[1].intValue() + 1.5D + 0.0D;
-                     var1.posZ = (double)(var4[2].intValue() + var14) + 0.5D;
+                     var1.locX = (double)(var4[0].intValue() + var13) + 0.5D;
+                     var1.locY = (double)var4[1].intValue() + 1.5D + 0.0D;
+                     var1.locZ = (double)(var4[2].intValue() + var14) + 0.5D;
                      if(var13 == -1) {
-                        var1.rotationYaw = 270.0F;
+                        var1.yaw = 270.0F;
                      } else if(var13 == 1) {
-                        var1.rotationYaw = 90.0F;
+                        var1.yaw = 90.0F;
                      } else if(var14 == -1) {
-                        var1.rotationYaw = 0.0F;
+                        var1.yaw = 0.0F;
                      } else if(var14 == 1) {
-                        var1.rotationYaw = 180.0F;
+                        var1.yaw = 180.0F;
                      }
                   }
                }
@@ -165,7 +165,7 @@ public class DETeleportation extends PoweredEvent {
                            var8.locZ = (double)var19[2] + 0.5D;
                            var8.yaw = (float)var19[5];
                            var1.ram = 100;
-                           EntityDust var20 = mod_DustMod.getWarpEntity(var19, var1.worldObj);
+                           EntityDust var20 = mod_DustMod.getWarpEntity(var19, var1.world);
                            if(var20 != null) {
                               var20.ram = 100;
                            }

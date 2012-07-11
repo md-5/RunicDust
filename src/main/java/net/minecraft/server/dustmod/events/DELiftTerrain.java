@@ -73,17 +73,17 @@ public class DELiftTerrain extends DustEvent {
 
    public void onTick(EntityDust var1) {
       var1.setColorStar(255, 255, 255);
-      if(var1.ticksExisted >= 64) {
+      if(var1.ticksLived >= 64) {
          if(var1.rutAreaPoints == null) {
             var1.fade();
          }
 
-         World var2 = var1.worldObj;
+         World var2 = var1.world;
          int var3 = var1.getX();
          int var4 = var1.getY();
          int var5 = var1.getZ();
          int var6 = var1.bb;
-         if(var1.ticksExisted % 32 == 0 && var1.gb <= var6) {
+         if(var1.ticksLived % 32 == 0 && var1.gb <= var6) {
             Iterator var7 = var1.rutAreaPoints.iterator();
 
             while(var7.hasNext()) {
@@ -104,7 +104,7 @@ public class DELiftTerrain extends DustEvent {
                      int var12 = var2.getData(var3, var4 + var10, var5);
                      int var13 = var2.getTypeId(var3, var4 + var10 + 1, var5);
                      if(var2.getTypeId(var3, var4 + var10 + 2, var5) == 0 && var11 != 0) {
-                        List var14 = this.getEntities(var1.worldObj, (double)var3 + 0.5D, (double)var4 + (double)var10 + 1.0D, (double)var5 + 0.5D, 1.0D);
+                        List var14 = this.getEntities(var1.world, (double)var3 + 0.5D, (double)var4 + (double)var10 + 1.0D, (double)var5 + 0.5D, 1.0D);
                         Iterator var15 = var14.iterator();
 
                         while(var15.hasNext()) {
@@ -165,7 +165,7 @@ public class DELiftTerrain extends DustEvent {
          Integer[] var5 = (Integer[])var1.rutAreaPoints.get(var4);
          int var6 = var5[0].intValue();
          int var7 = var5[1].intValue();
-         int var8 = var1.worldObj.getHighestBlockYAt(var6, var7);
+         int var8 = var1.world.getHighestBlockYAt(var6, var7);
          if(var8 < var2) {
             var2 = var8;
          }
@@ -191,9 +191,9 @@ public class DELiftTerrain extends DustEvent {
 
          while(var2.hasNext()) {
             Integer[] var3 = (Integer[])var2.next();
-            int var4 = var1.worldObj.random.nextInt(100);
+            int var4 = var1.world.random.nextInt(100);
             if(var4 > 15) {
-               TileEntityRut var5 = (TileEntityRut)var1.worldObj.getTileEntity(var3[0].intValue(), var3[1].intValue(), var3[2].intValue());
+               TileEntityRut var5 = (TileEntityRut)var1.world.getTileEntity(var3[0].intValue(), var3[1].intValue(), var3[2].intValue());
                if(var5 != null) {
                   ;
                }

@@ -29,15 +29,15 @@ public class DEObelisk extends DustEvent {
    }
 
    public void onTick(EntityDust var1) {
-      if(var1.ticksExisted >= 40) {
+      if(var1.ticksLived >= 40) {
          byte var2 = 16;
-         World var3 = var1.worldObj;
+         World var3 = var1.world;
          int var4 = var1.getX();
          int var5 = var1.getY();
          int var6 = var1.getZ();
-         if(var1.ticksExisted % 20 == 0 && var1.data < var2) {
+         if(var1.ticksLived % 20 == 0 && var1.data < var2) {
             if(var1.ri > 0) {
-               List var7 = this.getEntities(var1.worldObj, (double)var4 + 0.5D, (double)var5 + (double)var1.data + 2.0D, (double)var6 + 0.5D, 1.0D);
+               List var7 = this.getEntities(var1.world, (double)var4 + 0.5D, (double)var5 + (double)var1.data + 2.0D, (double)var6 + 0.5D, 1.0D);
                Iterator var8 = var7.iterator();
 
                while(var8.hasNext()) {
@@ -111,7 +111,7 @@ public class DEObelisk extends DustEvent {
             var1.fade();
          }
 
-         if(var1.ticksExisted - 20 * (var2 + 2) > '\u8ca0' && var1.ri > 0) {
+         if(var1.ticksLived - 20 * (var2 + 2) > '\u8ca0' && var1.ri > 0) {
             var1.fade();
          }
 

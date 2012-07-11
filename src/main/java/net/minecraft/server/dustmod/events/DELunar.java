@@ -29,10 +29,10 @@ public class DELunar extends DustEvent {
          var1.renderStar = true;
       }
 
-      long var2 = var1.worldObj.getTime() + 1000L;
-      if(var1.data == 1 && var1.worldObj.e()) {
-         var1.worldObj.setTime(var1.worldObj.getTime() + 25L);
-      } else if(var1.data == 0 && var1.worldObj.e() && !oneActive) {
+      long var2 = var1.world.getTime() + 1000L;
+      if(var1.data == 1 && var1.world.e()) {
+         var1.world.setTime(var1.world.getTime() + 25L);
+      } else if(var1.data == 0 && var1.world.e() && !oneActive) {
          oneActive = true;
          var1.data = 1;
       }
@@ -42,8 +42,8 @@ public class DELunar extends DustEvent {
          var1.renderStar = false;
       }
 
-      if(var1.data == 1 && !var1.worldObj.e()) {
-         var1.kill();
+      if(var1.data == 1 && !var1.world.e()) {
+         var1.aI();
       }
 
    }
